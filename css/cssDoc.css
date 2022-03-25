@@ -49,7 +49,7 @@ body{
     justify-content: flex-end;
     align-items: center;
     position: absolute;
-    top: 1em;
+     
     right: 1em;
     font-weight: bolder;
 }
@@ -90,7 +90,7 @@ tbody>tr>th{
     width: 100%;
     display: flex;
     justify-content: flex-start;
-    margin: 0 auto;
+    margin: 0  ;
     padding: 0 3em 0 0;
 }
 .Table{
@@ -353,13 +353,14 @@ section p {
     padding: 0 18px;
     display: none;
     overflow: hidden;
-    background-color: #f1f1f1;
+    font-weight: lighter;
   }
   .collapseButt{ 
     width: 100%;
     background-color: transparent;
     padding: 8px;
     margin-top: 0; 
+    font-weight: bold;
   } 
   thead{
       font-weight: lighter;
@@ -369,26 +370,92 @@ section p {
     font-size: 1.5em;
   }
 
-  @media (min-width: 1025px) {
+
+  @media (min-width:1200px) {
+      .nav-bar{
+          top: 2em;
+      }
+    .countTable { 
+        width: 60vw !important;
+    }
+    .card {
+        height: 23vw !important;
+    }
+    .sect {
+        margin: 25% 0 10% 10% !important;
+    }
+  }
+  @media (min-width:1600px) {
+    .buttons{
+        margin-top: 1em;
+    }
+    .columns{
+        margin: 0 250px;
+    }
+    .countTable { 
+        width: 60vw !important;
+    }
+    .card {
+        
+    height: 18vw !important;
+    width: 11vw !important;
+    }
+    .sect {
+        margin: 22% 0 10% 10% !important;
+    }
+  }
+
+  @media (max-width: 1400px) {
+    .columns{
+        margin: 0 250px;
+    }
+    .countTable{
+        margin: 0;
+        width: 40vw;
+    }
+    .navCont{
+        margin: 0;
+    }
+    .nav{
+        width: 25vw;
+    }
+    .card{
+        max-width: 12rem;
+        height: 17vw;
+    }
+    .sect{
+      margin: 20% 0 10% 10%;
+    }
+    .divider{
+      margin-left: 0%;
+      width: 100%;
+  } 
+  .buttons{
+      margin-top: 0em;
+
+  }
+}
+
+  @media (max-width: 1200px) {
       .columns{
           margin: 0 250px;
       }
       .countTable{
           margin: 0;
-          width: 40vw;
+          width: 70vw;
       }
       .navCont{
           margin: 0;
       }
       .nav{
-          width: 20vw;
+          width: 30vw;
       }
       .card{
           max-width: 12rem;
-          height: 17vw;
+          height: 30vw;
       }
       .sect{
-        margin: 20% 0 10% 10%;
+        margin: 35% 0 10% 10%;
       }
       .divider{
         margin-left: 0%;
