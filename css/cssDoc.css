@@ -361,6 +361,13 @@ section p {
     padding: 8px;
     margin-top: 0; 
   } 
+  thead{
+      font-weight: lighter;
+  }
+  tbody{
+    font-weight: bolder;
+    font-size: 1.5em;
+  }
 
   @media (min-width: 1025px) {
       .columns{
@@ -389,6 +396,6 @@ section p {
     }
     .buttons{
         margin-top: 2em;
-        
+
     }
   }
