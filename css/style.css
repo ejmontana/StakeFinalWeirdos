@@ -1,0 +1,221 @@
+@font-face {
+  font-family: galano;
+  src: url("./galano/GalanoGrotesque-Light.woff2") format("woff2"), url("./galano/GalanoGrotesque-Light.woff") format("woff");
+  font-weight: 300;
+}
+body{
+  font-family: galano;
+  border: 0;
+  margin: 0;
+  padding: 0;
+}
+
+.menu{
+    background-image: url("../img/wEIRD.png");
+    color: #fff;
+    height: 30rem;
+    
+}
+
+img,
+video {
+  height: auto;
+  max-width: 100%;
+}
+.img{
+    position: absolute;
+    z-index: -3;
+    top: 0rem;
+}
+
+.carousel-img{
+    padding-left: 1rem;
+}
+
+
+.slider {
+    text-align: center;
+    position: relative;
+  
+  }
+  
+  .slides {
+    width: 100%; /* card * 4 + margin * 4 */
+    /*display: flex;*/
+    overflow-x: scroll;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+    transition: all .5s ease;
+    overflow-x: hidden;
+    overflow-y: hidden;
+  }
+  .slides .slide {
+    scroll-snap-align: start;
+    flex-shrink: 0;
+  
+    margin-right: 15px;
+    margin-left: 15px;
+    border-radius: 10px;
+    background: #eee;
+    transition: transform 0.5s;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    transform: translateX(0px);
+  }
+  
+  .slider .btn-prev,
+  .slider .btn-next{
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    background: white;
+    top: 50%;
+    transform: translateY(-50%);
+    border-radius: 50%;
+    box-shadow: 0 0 15px rgba(17,17,17,.15);
+    cursor: pointer;
+  }
+  .slider .btn-prev{
+    left: -15px;
+  }
+  .slider .btn-next{
+    right: -15px;
+  }
+  .slider .btn-prev:after,
+  .slider .btn-next:after{
+    content: "";
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    border-top: 1px solid red;
+    border-right: 1px solid red;
+  }
+  .slider .btn-prev:after{
+    left: 50%;
+    top: 50%;
+    transform-origin: top right;
+    transform: rotate(-135deg) translate(100%, -100%);
+  }
+  .slider .btn-next:after{
+        left: 50%;
+      top: 50%;
+      transform-origin: top right;
+        transform: rotate(45deg) translate(-25%, 50%);
+  }
+  .carrusel-wrap .bx-controls .bx-controls-direction > .btn-prev.invisible,
+  .carrusel-wrap .bx-controls .bx-controls-direction > .btn-next.invisible {
+      opacity: 0;
+      pointer-events: none;
+  }
+
+
+  /* Lazy Load Styles */
+.card-image {
+	display: block;
+	min-height: 20rem; /* layout hack */
+	background: #fff center center no-repeat;
+	background-size: cover;
+	filter: blur(3px); /* blur the lowres image */
+}
+
+.card-image > img {
+	display: block;
+	width: 100%;
+	opacity: 0; /* visually hide the img element */
+}
+
+.card-image.is-loaded {
+	filter: none; /* remove the blur on fullres image */
+	transition: filter 1s;
+} 
+
+.card {
+	max-width: 20rem;
+	margin: 1rem;
+	font-size: 1rem;
+	text-decoration: none;
+	overflow: hidden;
+	box-shadow: 0 0 3rem -1rem rgba(0,0,0,0.5);
+	transition: transform 0.1s ease-in-out, box-shadow 0.1s;
+}
+
+.card:hover {
+	transform: translateY(-0.5rem) scale(1.0125);
+	box-shadow: 0 0.5em 3rem -1rem rgba(0,0,0,0.5);
+}
+
+.card-description {
+	display: block;
+	padding: 1em 0.5em;
+	color: #515151;
+	text-decoration: none;
+}
+
+.card-description > h2 {
+	margin: 0 0 0.5em;
+}
+
+.card-description > p {
+	margin: 0;
+}
+
+.boton{
+  text-shadow: 0px 1px rgba(0, 0, 0, 0.2);
+  text-align:center;
+  text-decoration: none;
+  font-family: 'Helvetica Neue', Helvetica, sans-serif;
+  display:inline-block;
+  color: #FFF;
+  background: #7F8C8D;
+  padding: 7px 45px;
+  white-space: nowrap;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 100px;
+  margin: 10px 5px;
+  -webkit-transition: all 0.2s ease-in-out;
+  -ms-transition: all 0.2s ease-in-out;
+  -moz-transition: all 0.2s ease-in-out;
+  -o-transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
+}
+
+.azul{
+background: #111111;
+box-shadow: 0px 5px 0px 0px #111111;
+}
+
+.azul:hover{
+background: #615959;
+color: #ffffff;
+}
+
+.azul:active{
+box-shadow: 0px 2px 0px 0px #111111;
+}
+ 
+.navbar-end{
+  display: flex;
+  justify-content: flex-end;
+  margin: 1em ; 
+}
+
+.button:hover{
+  background: #615959;
+  color: #ffffff;
+}
+#navbarBasicExample {
+  color: #fff
+}
+
+.navbar-item{
+  margin: 0 2.5em;
+  padding: 0 2em;  
+}
+.container{
+  margin: 0 auto;
+  max-width: 100%;
+}
