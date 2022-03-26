@@ -106,12 +106,11 @@ tbody>tr>th{
     font-weight: bold !important;
 }
 .divider{
-    margin: 1.5em 0;
+    margin: 1em ;
     width: 100%;
-    height: 2px;
+    height: 4px;
     display: flex;
     justify-content: center;
-    background-color: rgba(192, 192, 192, 0.50); 
 }
 .span{
     color: #111;
@@ -502,7 +501,7 @@ section p {
     margin: 0 0 0 1em;
   }
   .footer{
-      height: 80px;
+      height: 4vw;
       background-color: #212121;
       width: 99vw;
       text-align: center;
@@ -578,8 +577,9 @@ section p {
       margin-top: 12em !important; 
       width: 99vw;
       background-color:#0a4452;
-      height: 50vh;
-      padding: 0;
+      height: 40%;
+      
+      padding: 0 0 3em 0;
       color: #7F8C8D;
   }
   .colla>button{
@@ -588,7 +588,9 @@ section p {
   .content>p{
     color: #fff;
   }
-  .footer>img{
-      float: right;
-      margin-right: 4em;
+  .footer>img{    
+    float: right;
+    margin-right: 4em;
+    height: auto;
+    width: 30%;
   }
