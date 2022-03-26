@@ -14,6 +14,11 @@
     src: url("./galano/GalanoGrotesque-Medium.woff2") format("woff2"), url("./galano/GalanoGrotesque-Medium.woff") format("woff");
   }
 
+@font-face {
+    font-family: galanoBlack;
+    src: url("./galano/GalanoGrotesque-Black.woff2") format("woff2"), url("./galano/GalanoGrotesque-Black.woff") format("woff");
+  }
+
   @font-face {
     font-family: gloria;
     src: url("./gloria-hallelujah-v15-latin/gloria-hallelujah-v15-latin-regular.woff") format("woff"),url("./gloria-hallelujah-v15-latin/gloria-hallelujah-v15-latin-regular.woff2") format("woff2");  
@@ -359,8 +364,8 @@ section p {
     width: 100%;
     background-color: transparent;
     padding: 8px;
-    margin-top: 0; 
-    font-weight: bold;
+    margin-top: 0;  
+    font-family:  galanoBlack;
   } 
   thead{
       font-weight: lighter;
