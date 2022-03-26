@@ -135,7 +135,7 @@ ul {
     height: 30vw;
     margin: 1em;
     background-color: #fff;
-    display: flex;
+    display: contents !important;
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
@@ -474,7 +474,8 @@ section p {
 @media (min-width:1401px) {
     .card {
         max-width: 14rem !important;
-
+        height: 22vw !important;
     }
-    
 }
+
+ 
