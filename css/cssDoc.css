@@ -598,3 +598,6 @@ section p {
       width: 35px;  
       height: auto;
   }
+  #aprobar{
+      float: right;
+  }
