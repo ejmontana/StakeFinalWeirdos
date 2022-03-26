@@ -413,6 +413,16 @@ section p {
     .sect {
         margin: 21% 0 10% 10% !important;
     }
+    .imgClaim>img {
+        width: 35vw;
+    }
+    .sect {
+        margin: 19% 0 10% 10% !important;
+    }
+    .columns {
+    margin: 0 260px !important;
+}
+
   }
 
   @media (max-width: 1400px) {
@@ -508,15 +518,7 @@ section p {
       padding: 15px;
   }
   @media (min-width: 1600px) {
-    .imgClaim>img {
-        width: 24vw;
-    }
-    .sect {
-        margin: 19% 0 10% 10% !important;
-    }
-    .columns {
-    margin: 0 260px !important;
-}
+   
   }
   .tabla{
     margin-top: 2em;
