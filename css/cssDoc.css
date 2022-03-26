@@ -130,7 +130,7 @@ ul {
   }   
   
 .test{
-    margin-top: 3em;
+    margin: 3em 0 6em 0;
     display: flex;
     justify-content: space-evenly;
     
@@ -509,6 +509,9 @@ section p {
       padding: 15px;
   }
   @media (min-width: 1600px) {
+    .imgClaim>img {
+        width: 24vw;
+    }
     .sect {
         margin: 19% 0 10% 10% !important;
     }
@@ -559,4 +562,33 @@ section p {
     border-top: 2em solid transparent;
     border-bottom: 2em solid transparent; 
     border-right:2em solid #444; 
+  }
+  .separator{
+    width: 99vw;
+    height: 4em;
+    background-color: white;
+    margin:0;
+    padding: 0 10vw; 
+}
+.preImgClaim{
+
+    padding: 3em 0 0 10vw;
+}
+  .contClaim{
+      margin-top: 12em !important; 
+      width: 99vw;
+      background-color:#0a4452;
+      height: 50vh;
+      padding: 0;
+      color: #7F8C8D;
+  }
+  .colla>button{
+      color: #fff;
+  }
+  .content>p{
+    color: #fff;
+  }
+  .footer>img{
+      float: right;
+      margin-right: 4em;
   }
