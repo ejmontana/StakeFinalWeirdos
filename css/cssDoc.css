@@ -532,7 +532,7 @@ section p {
   .tri{
     background-color: transparent; 
     position: relative;
-    top: 5em;
+    top: 2em;
     z-index: 999;
     cursor: pointer;
   }
