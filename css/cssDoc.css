@@ -18,8 +18,7 @@
 *{
     margin: 0%;
     padding: 0%;
-    border: 0; 
-
+    border: 0;  
 }
 body{
     border: 0;
@@ -50,6 +49,9 @@ body{
     align-items: center;
     position: absolute;
     right: 1em;
+}
+.column{
+    margin: 0 0.5em;
 }
 .navCont{
     font-family: galLight;
@@ -242,6 +244,7 @@ ul {
   }
    
 .columns{
+    overflow-x: hidden !important;
     display: flex;
     justify-content: space-between;
     padding: 0 1.5em;
@@ -249,9 +252,7 @@ ul {
     position: absolute;
     left: -80px; 
     margin: 0 200px !important;
-    width: 80vw;
-    overflow: overlay !important;
-    overflow: hidden;
+    width: 80vw; 
     margin: 0 160px; 
 }
 .sect{
@@ -523,4 +524,38 @@ section p {
   } 
   body { 
     overflow-x: hidden; /* Hide horizontal scrollbar */
+  }
+  .tri{
+    background-color: transparent; 
+    position: relative;
+    top: 5em;
+    z-index: 999;
+    cursor: pointer;
+  }
+  .tri:focus{
+    outline: none;
+  }
+
+  .tri:hover{
+    outline: none;
+
+  }
+  .arrow-right { 
+    float: right;
+    margin-right: 3em;
+    width: 0; 
+    height: 0; 
+    border-top: 2em solid transparent;
+    border-bottom: 2em solid transparent;
+    border-left: 2em solid #444;
+  }
+
+.arrow-left {
+
+    margin-left: 3em;  
+    width: 0; 
+    height: 0; 
+    border-top: 2em solid transparent;
+    border-bottom: 2em solid transparent; 
+    border-right:2em solid #444; 
   }
