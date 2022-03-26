@@ -80,11 +80,11 @@ a:focus, a:focus-visible, a:focus-within, a:hover{
     text-decoration: none;
 } 
 thead>tr>th{
-    padding: 0 1em;
+    padding: 0  ;
     font-family: galLight;
 }
 tbody>tr>th{
-    padding: 0 1em;
+    padding: 0;
     font-family: galBold;
 }
 
@@ -94,6 +94,7 @@ tbody>tr>th{
     justify-content: flex-start;
     margin: 0  ;
     padding: 0 3em 0 0;
+    width: 50vw !important;
 }
 .Table{
     width: 80vw;
@@ -118,7 +119,7 @@ ul {
   .nav{
       display: flex;
       justify-content: space-evenly;
-    width: 30vw;
+    width: 20vw;
     margin: 0%;
   }   
   
@@ -333,7 +334,7 @@ section p {
   }
   .colla{
       margin: 2em 0 0 2em;
-      width: 30vw;
+      width: 36vw;
   }
   
 
@@ -463,7 +464,7 @@ section p {
           height: 30vw;
       }
       .sect{
-        margin: 35% 0 10% 10%;
+        margin: 30% 0 10% 10%;
       }
       .divider{
         margin-left: 0%;
@@ -480,4 +481,6 @@ section p {
         }
     }
 
- 
+ .is-active{
+     font-family: galBold;
+ }
