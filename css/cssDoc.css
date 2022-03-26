@@ -99,6 +99,8 @@ tbody>tr>th{
 .Table{
     width: 80vw;
     font-family: galLight;
+    font-size: 1.2em;
+    font-weight: bold !important;
 }
 .divider{
     margin: 1.5em 0;
@@ -399,7 +401,7 @@ section p {
         margin-top: 1em;
     }
     .columns{
-        margin: 0 250px;
+        margin: 0 300px !important;
     }
     .countTable { 
         width: 60vw !important;
