@@ -1,9 +1,4 @@
-*{
-    margin: 0%;
-    padding: 0%;
-    border: 0; 
-    font-family: galanoMedium; 
-}
+
 @font-face {
     font-family: galano;
     src: url("./galano/GalanoGrotesque-Light.woff2") format("woff2"), url("./galano/GalanoGrotesque-Light.woff") format("woff");
@@ -23,6 +18,23 @@
     font-family: gloria;
     src: url("./gloria-hallelujah-v15-latin/gloria-hallelujah-v15-latin-regular.woff") format("woff"),url("./gloria-hallelujah-v15-latin/gloria-hallelujah-v15-latin-regular.woff2") format("woff2");  
   }
+  @font-face {
+    font-family: galBold;
+    font-weight: bold;
+    src: url("./galano/GalanoGrotesque-Bold.eot") format("opentype"), url("./galano/GalanoGrotesque-Bold.woff2") format("woff2"), url("./galano/GalanoGrotesque-Bold.woff") format("woff");
+}
+
+@font-face {
+    font-family: galLight;
+    font-weight: bold;
+    src: url("./galano/GalanoGrotesque-Light.eot") format("opentype"),url("./galano/GalanoGrotesque-Light.woff2") format("woff2"),url("./galano/GalanoGrotesque-Light.woff") format("woff");
+}
+*{
+    margin: 0%;
+    padding: 0%;
+    border: 0; 
+    font-family: galLight; 
+}
 body{
     border: 0;
     margin: 0;
@@ -365,13 +377,13 @@ section p {
     background-color: transparent;
     padding: 8px;
     margin-top: 0;  
-    font-family:  galanoBlack;
+    font-family:  galBold !important;
   } 
   thead{
-      font-weight: lighter;
+    font-family: galLight;
   }
   tbody{
-    font-weight: bolder;
+    font-family:  galBold !important;
     font-size: 1.5em;
   }
 
