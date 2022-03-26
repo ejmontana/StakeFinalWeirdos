@@ -100,7 +100,7 @@ tbody>tr>th{
 }
 .Table{
     text-align: center;
-    width: 80vw;
+    width: 50vw !important;
     font-family: galLight;
     font-size: 1.2em;
     font-weight: bold !important;
@@ -255,10 +255,9 @@ ul {
     width: 80vw; 
     margin: 0 160px; 
 }
-.sect{
-    margin-top: 36%;
+.sect{ 
     margin-left: 10%;
-    margin:36% 0 10% 10%;
+    margin:35% 0 10% 10%;
     width:80vw ;
     font-family: galLight;
 }
@@ -394,7 +393,7 @@ section p {
         height: 23vw !important;
     }
     .sect {
-        margin: 22% 0 10% 10% !important;
+        margin: 20% 0 10% 10% !important;
     }
   }
   @media (min-width:1600px) {
@@ -413,7 +412,7 @@ section p {
     width: 11vw !important;
     }
     .sect {
-        margin: 22% 0 10% 10% !important;
+        margin: 21% 0 10% 10% !important;
     }
   }
 
@@ -436,7 +435,7 @@ section p {
         height: 17vw;
     }
     .sect{
-      margin: 24% 0 10% 10%;
+      margin: 22% 0 10% 10%;
     }
     .divider{
       margin-left: 0%;
@@ -467,7 +466,7 @@ section p {
           height: 30vw;
       }
       .sect{
-        margin: 32% 0 10% 10%;
+        margin: 31% 0 10% 10%;
       }
       .divider{
         margin-left: 0%;
