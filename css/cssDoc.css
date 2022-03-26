@@ -19,7 +19,7 @@
     margin: 0%;
     padding: 0%;
     border: 0; 
-    /* font-family: galLight;  */
+
 }
 body{
     border: 0;
@@ -466,7 +466,7 @@ section p {
           height: 30vw;
       }
       .sect{
-        margin: 30% 0 10% 10%;
+        margin: 32% 0 10% 10%;
       }
       .divider{
         margin-left: 0%;
@@ -504,12 +504,23 @@ section p {
   .footer{
       height: 60px;
       background-color: #212121;
-      width: 100vw;
+      width: 99vw;
   }
   @media (min-width: 1600px) {
     .sect {
-        margin: 14% 0 10% 10% !important;
+        margin: 19% 0 10% 10% !important;
     }
+    .columns {
+    margin: 0 260px !important;
+}
   }
-      
+  .tabla{
+    margin-top: 2em;
+    width: 100%;
+  }
+  th{
+      width: 20%;
+  } 
+  body { 
+    overflow-x: hidden; /* Hide horizontal scrollbar */
   }

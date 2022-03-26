@@ -1,9 +1,20 @@
 const carSld = document.getElementById("carrusel-slides");
 const carSlds = document.querySelector("#carrusel-slides .slide");
-const carRight = document.querySelector(".btn-next");
-const carLeft = document.querySelector(".btn-prev");
+const carRight = document.querySelector("#btn-next");
+const carLeft = document.querySelector("#btn-prev");
 let direction;
 
+///
+const buttonRight = document.getElementById('slideRight');
+const buttonLeft = document.getElementById('slideLeft');
+
+buttonRight.onclick = function () {
+  $('html, body').animate(document.getElementById('carousel-img1').scrollLeft += 200)
+};
+buttonLeft.onclick = function () {
+  document.getElementById('carousel-img1').scrollLeft -= 200;
+};
+///
 carRight.onclick = function () {
   carSld.scrollLeft += 220;  
 };
@@ -21,7 +32,7 @@ window.addEventListener('load', function() {
 	// setTimeout to simulate the delay from a real page load
 	setTimeout(lazyLoad, 1000);
 	
-});
+}); 
 
 function lazyLoad() {
 	var card_images = document.querySelectorAll('.card-image');
