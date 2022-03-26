@@ -471,3 +471,10 @@ section p {
 
     }
   }
+@media (min-width:1401px) {
+    .card {
+        max-width: 14rem !important;
+
+    }
+    
+}
