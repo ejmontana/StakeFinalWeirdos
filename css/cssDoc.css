@@ -120,7 +120,7 @@ ul {
     padding: 0;
   }
   .nav{
-      font-size: 25px;
+      font-size: 20px;
       display: flex;
       justify-content: space-evenly;
     width: 30vw;
@@ -203,9 +203,7 @@ ul {
  
 .card-description > p {
 	margin: 0;
-}
-
-
+}  
 .boton{
     text-shadow: 0px 1px rgba(0, 0, 0, 0.2);
     text-align:center;
@@ -395,7 +393,7 @@ section p {
         height: 23vw !important;
     }
     .sect {
-        margin: 25% 0 10% 10% !important;
+        margin: 22% 0 10% 10% !important;
     }
   }
   @media (min-width:1600px) {
@@ -486,7 +484,8 @@ section p {
     }
 
  .is-active{
-     font-family: galBold; 
+     font-family: galBold;  
+
  } 
  .all{
      font-size: 17px;
@@ -501,4 +500,16 @@ section p {
   .countTable{
     width: 80vw !important;
     margin: 0 0 0 1em;
+  }
+  .footer{
+      height: 60px;
+      background-color: #212121;
+      width: 100vw;
+  }
+  @media (min-width: 1600px) {
+    .sect {
+        margin: 14% 0 10% 10% !important;
+    }
+  }
+      
   }
