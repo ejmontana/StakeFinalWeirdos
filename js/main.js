@@ -132,6 +132,10 @@ async function loadAccount() {
   if (IsAproba) {
     $("#aprobar").hide();
   }
+  IsAproba = await contract.methods.isApprovedForAll(accounts[0], stakeAddress).call()
+  if (IsAproba) {
+    $("#aprobarM").hide();
+  }
   //console.log(IsAproba)
   for (let e = 0; e < misNftsID.length; e++) {
     imgURL = "https://uw-app-k5iwr.ondigitalocean.app/metadata/" + misNftsID[e] +".json"
@@ -140,14 +144,11 @@ async function loadAccount() {
         // función que se ejecutará al recibir una respuesta
         var nftsMis = response.data.image
         //console.log(nftsMis)
-        const nftdiv = document.getElementById("carousel-img1")
+        const nftdiv = document.getElementById("carousel-img1") 
         const insertarnft = document.createElement("div")
         insertarnft.classList.add("column")
         insertarnft.classList.add("is-one-quarter-desktop")
         insertarnft.classList.add("is-half-tablet")
-   
-   
-        
        
         insertarnft.innerHTML=` 
         
@@ -156,17 +157,50 @@ async function loadAccount() {
           <img src=${nftsMis}" alt="Psychopomp" />
         </div>
         <div class="card-description">
-          <h2>Weirdos #${misNftsID[e]}</h2>
+          <h2>Weirdo #${misNftsID[e]}</h2>
           <a onclick="Stake(${misNftsID[e]}, 0)" class="boton azul">Stake</a >
           
         </div>
       </div>
-            
-        
         `; 
 
 
-        nftdiv.appendChild(insertarnft)
+        nftdiv.appendChild(insertarnft) 
+      })
+      .catch(function (error) {
+        // función para capturar el error
+        console.log(error);
+      })
+  }
+
+  for (let e = 0; e < misNftsID.length; e++) {
+    imgURL = "https://uw-app-k5iwr.ondigitalocean.app/metadata/" + misNftsID[e] +".json"
+    axios.get(imgURL)
+      .then((response) => {
+        // función que se ejecutará al recibir una respuesta
+        var nftsMis = response.data.image
+        //console.log(nftsMis)
+        const nftdiv = document.getElementById("carousel-img1-M") 
+        const insertarnft = document.createElement("div")
+        insertarnft.classList.add("column")
+        insertarnft.classList.add("is-one-quarter-desktop")
+        insertarnft.classList.add("is-half-tablet")
+       
+        insertarnft.innerHTML=` 
+        
+        <div class="card is-loaded">
+        <div class="card-image is-loaded"  style="background-image: url(${nftsMis})" data-image-full="${nftsMis}">
+          <img src=${nftsMis}" alt="Psychopomp" />
+        </div>
+        <div class="card-description">
+          <h2>Weirdo #${misNftsID[e]}</h2>
+          <a onclick="Stake(${misNftsID[e]}, 0)" class="boton azul">Stake</a >
+          
+        </div>
+      </div>
+        `; 
+
+        nftdiv.appendChild(insertarnft) 
       })
       .catch(function (error) {
         // función para capturar el error
@@ -186,10 +220,11 @@ async function loadAccount() {
         stake.methods.getCurrentStakeEarned(balanceStake[e]).call().then(userBalance => {
            TotalMinado = web3.utils.fromWei(userBalance);
            TokenUser  = parseFloat(TokenUser) + parseFloat(TotalMinado) ;
-            document.getElementById("Your_Reward").textContent = TokenUser;
+           document.getElementById("Your_Reward").textContent = TokenUser;
+           document.getElementById("Your_Reward_M").textContent = TokenUser;
           
            console.log(TokenUser)
-           const nftdiv = document.getElementById("carousel-img2")
+           const nftdiv = document.getElementById("carousel-img2") 
            const insertarnft = document.createElement("div")
            insertarnft.classList.add("column")
            insertarnft.classList.add("is-one-quarter-desktop")
@@ -206,11 +241,10 @@ async function loadAccount() {
              <a onclick="UnStake(${balanceStake[e]})" class="boton azul">UnStake</a >
              
            </div>
-         </div>
-        
-       `
-
+         </div> 
+       ` 
            nftdiv.appendChild(insertarnft)
+           nftdivM.appendChild(insertarnft)
          })
          .catch(function (error) {
            // función para capturar el error
@@ -219,9 +253,55 @@ async function loadAccount() {
 
         }).catch((err) => {
           console.log(err)
-        });
-        
-     
+        }); 
+  }
+
+  for (let e = 0; e < balanceStake.length; e++) {
+    imgURL = "https://uw-app-k5iwr.ondigitalocean.app/metadata/" + balanceStake[e] +".json"
+    axios.get(imgURL)
+      .then((response) => {
+    console.log(imgURL)
+
+        // función que se ejecutará al recibir una respuesta
+        var nftsMis = response.data.image
+   
+        stake.methods.getCurrentStakeEarned(balanceStake[e]).call().then(userBalance => {
+           TotalMinado = web3.utils.fromWei(userBalance);
+           TokenUser  = parseFloat(TokenUser) + parseFloat(TotalMinado) ;
+           document.getElementById("Your_Reward").textContent = TokenUser;
+           document.getElementById("Your_Reward_M").textContent = TokenUser;
+          
+           console.log(TokenUser)
+           const nftdiv = document.getElementById("carousel-img2-M") 
+           const insertarnft = document.createElement("div")
+           insertarnft.classList.add("column")
+           insertarnft.classList.add("is-one-quarter-desktop")
+           insertarnft.classList.add("is-half-tablet")
+      
+           insertarnft.innerHTML = ` 
+           <div class="card is-loaded">
+           <div class="card-image is-loaded"  style="background-image: url(${nftsMis})" data-image-full="${nftsMis}">
+             <img src=${nftsMis}" alt="Psychopomp" />
+           </div>
+           <div class="card-description">
+             <h2>Weirdos #${balanceStake[e]}</h2>
+             <p>Total Mined ${TotalMinado}</p>
+             <a onclick="UnStake(${balanceStake[e]})" class="boton azul">UnStake</a >
+             
+           </div>
+         </div> 
+       ` 
+           nftdiv.appendChild(insertarnft)
+           nftdivM.appendChild(insertarnft)
+         })
+         .catch(function (error) {
+           // función para capturar el error
+           console.log(error);
+         })
+
+        }).catch((err) => {
+          console.log(err)
+        }); 
   }
 
 
@@ -241,14 +321,16 @@ async function loadAccount() {
     }
   }).catch((err) => {
     console.log(err)
-  });
-
-
-
+  }); 
     document.getElementById("Your_Weirdos").textContent = balance;
     document.getElementById("Staked").textContent = balanceStake.length;
     document.getElementById("Total_Stake").textContent = totalstaked;
-}
+
+    document.getElementById("Your_Weirdos_M").textContent = balance;
+    document.getElementById("Staked_M").textContent = balanceStake.length;
+    document.getElementById("Total_Stake_M").textContent = totalstaked;
+    
+  }
 
 
 async function loadDapp() {
@@ -258,6 +340,7 @@ async function loadDapp() {
     web3.eth.net.getId((err, netId) => {
       if (netId == NETWORK_ID) {
         $("#nft-en-stake").hide();
+        $("#nft-en-stake-M").hide();
 
 
         var awaitContract = async function () {
@@ -355,21 +438,35 @@ const UnStake = async (_idnfts) => {
 
 }
 
-
-function NoStake(){
-  $( "#InStake" ).removeClass( "is-active" );
+function NoStake(){ 
+  $("#InStake").removeClass( "is-active");
   $("#NoStake").addClass("is-active");
   $("#nft-en-stake").hide();
   $("#nft-no-stake").show();
-
 }
-function InStake(){
-  $( "#NoStake" ).removeClass( "is-active" );
+function InStake(){ 
+  $("#NoStake").removeClass( "is-active");
   $("#InStake").addClass("is-active");
   $("#nft-no-stake").hide();
   $("#nft-en-stake ").show(); 
+}
+
+
+function NoStakeM(){ 
+  $("#InStakeM").removeClass( "is-active");
+  $("#NoStakeM").addClass("is-active");
+  $("#nft-en-stake-M").hide();
+  $("#nft-no-stake-M").show();
 
 }
+function InStakeM(){ 
+  $("#NoStakeM").removeClass( "is-active");
+  $("#InStakeM").addClass("is-active");
+  $("#nft-no-stake-M").hide();
+  $("#nft-en-stake-M").show(); 
+
+}
+
 
 var coll = document.getElementsByClassName("collapsible");
 var i;
