@@ -3,12 +3,107 @@
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=1024, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Weirdos Stake</title> 
   <link rel="stylesheet" href="css/cssDoc.css"> 
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
-<body>
+<body> 
+  <div class="cMobile">
+    <img class="banner" src="img/Movil Baner.png" alt="">
+
+    <div class="cont">
+      <div class="header"> 
+        <div id="web3_message"></div>  
+
+          <table class="Table" >
+            <thead>
+              <tr>
+                <th>Your Weirdos</th>
+                <th>Staked      </th>
+                <th>Total Staked </th>
+                <th>Your Rewards </th> 
+               
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th id="Your_Weirdos"></th>
+                <th id="Staked"></th>
+                <th id="Total_Stake"></th>
+                <th id="Your_Reward"></th> 
+               
+              </tr>
+            </tbody>
+            <a onclick="NftApro()" id="aprobar" class="boton azul">Approve STAKING</a>
+          </table>  
+          <div class="linea"> </div>
+          <div class="navCont">
+           <ul class="nav">
+             <li  class="is-active" id="NoStake">
+               <a onclick="NoStake()">
+                  <span class="span">UNSTAKED WEIRDOS</span>  
+               </a>
+             </li>
+             |
+             <li class="" id="InStake">
+                <a onclick="InStake()">
+                    <span class="span">STAKED WEIRDOS</span>  
+                </a>  
+             </li>
+           </ul>
+          </div>
+          <div class="test">
+            <div id="carrusel"  >
+                <div id="carrusel-slides"  >
+                  <div id="nft-no-stake">
+                  <div class="columnsM" id="carousel-img1"></div>
+                  </div>
+                  <div id="nft-en-stake">
+                    <div class="columnsM" id="carousel-img2"></div>
+      
+                  </div>
+              </div>
+            </div> 
+          </div> 
+
+      <div class="linea spa"> </div>
+      <p class="">
+        You own a lot of <b>WEIRDOS</b>? Save time and Gas!
+      </p>
+      <div class="stakeAll"> <a  onclick="StakeALL()" >STAKE ALL WEIRDOS </a></div>
+      <div class="stakeAll"> <a  onclick="UnStakeALL()">UNSTAKE ALL WEIRDOS </a></div>
+      <img class="claimM" src="img/Claim.png" alt="">
+      <div class="faqM">
+        <div class="collaM">
+          <button type="button" class="collapsible collapseButt active">+ How many weirdos can I stake?</button>
+          <div class="content" style="display: block;" >
+            <p>There are no limits, you can stake all the weirdos you have in your wallet.</p>
+          </div> 
+          <button type="button" class="collapsible collapseButt ">+ How much $UWU does each weirdo generate?</button>
+          <div class="content">
+            <p>Approximately 1 $UWU per day, since the payment is made for each block mined on the Polygon network.</p>
+          </div> 
+          <button type="button" class="collapsible collapseButt ">+ Are there bonuses for whales?</button>
+          <div class="content">
+            <p>Yes, you will receive an additional percentage if you stake more weirdos: 10+ (2% bonus), 30+ (5% bonus), 50+ (8% bonus) and 100+ (12% bonus).</p>
+          </div> 
+          <button type="button" class="collapsible collapseButt ">+ Can I unstake my weirdos whenever I want?</button>
+          <div class="content">
+            <p>Yes, you can withdraw the weirdos from the stake whenever you want, but by doing so you will stop receiving rewards.</p>
+          </div> 
+          <button type="button" class="collapsible collapseButt ">+ What is the $UWU token used for?</button>
+          <div class="content">
+            <span>With it you can buy a new NFT, acquire lootboxes with prizes (MATIC, ETH, NFT's from many collections and more) or you can sell it on quickswap.</span>
+          </div> 
+        </div> 
+
+      </div>
+      </div> 
+    </div>
+  </div>
+
+  <div class="cDesktop" >
   <div class="containerM">
   <div class="nav-bar" > 
       <div class="buttons">
@@ -73,7 +168,6 @@
               </tr>
             </tbody>
             <a onclick="NftApro()" id="aprobar" class="boton azul">Approve STAKING</a>
-
           </table> 
 
        <div class="divider"></div>
@@ -102,7 +196,6 @@
           <div id="carrusel-slides" class="slides">
             <div id="nft-no-stake">
               <div class="columns" id="carousel-img1"></div>
-
              
             </div>
             <div id="nft-en-stake">
@@ -110,8 +203,7 @@
 
             </div>
         </div>
-      </div>
-    
+      </div> 
     </div> 
  
     <button id="slideLeft" type="button" class="tri arrow-left">   </button>
@@ -154,9 +246,8 @@
 
 <div class="footer"> <img src="./img/evil devils.png" alt=""> 
 </div>
-	 
-  
 </div> 
+</div>
 </body>
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 

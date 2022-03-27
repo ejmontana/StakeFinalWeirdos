@@ -1,20 +1,19 @@
- 
-
-  @font-face {
+@font-face {
     font-family: gloria;
     src: url("./gloria-hallelujah-v15-latin/gloria-hallelujah-v15-latin-regular.woff") format("woff"),url("./gloria-hallelujah-v15-latin/gloria-hallelujah-v15-latin-regular.woff2") format("woff2");  
   }
-  @font-face {
+@font-face {
     font-family: galBold;
     font-weight: bold;
     src: url("./galano/GalanoGrotesque-Bold.eot") format("opentype"), url("./galano/GalanoGrotesque-Bold.woff2") format("woff2"), url("./galano/GalanoGrotesque-Bold.woff") format("woff");
 }
-
 @font-face {
     font-family: galLight;
     font-weight: bold;
     src: url("./galano/GalanoGrotesque-Light.eot") format("opentype"),url("./galano/GalanoGrotesque-Light.woff2") format("woff2"),url("./galano/GalanoGrotesque-Light.woff") format("woff");
 }
+ 
+
 *{
     margin: 0%;
     padding: 0%;
@@ -380,117 +379,7 @@ section p {
     font-size: 1.5em;
   }
 
-
-  @media (min-width:1200px) {
-      .nav-bar{
-          top: 2em;
-      }
-    .countTable { 
-        width: 60vw !important;
-    }
-    .card {
-        height: 23vw !important;
-    }
-    .sect {
-        margin: 20% 0 10% 10% !important;
-    }
-  }
-  @media (min-width:1600px) {
-    .buttons{
-        margin-top: 1em;
-    }
-    .columns{
-        margin: 0 300px !important;
-    }
-    .countTable { 
-        width: 60vw !important;
-    }
-    .card {
-        
-    height: 18vw !important;
-    width: 11vw !important;
-    }
-    .sect {
-        margin: 21% 0 10% 10% !important;
-    }
-    .imgClaim>img {
-        width: 35vw;
-    }
-    .sect {
-        margin: 19% 0 10% 10% !important;
-    }
-    .columns {
-    margin: 0 260px !important;
-}
-
-  }
-
-  @media (max-width: 1400px) {
-    .columns{
-        margin: 0 200px;
-    }
-    .countTable{
-        margin: 0;
-        width: 40vw;
-    }
-    .navCont{
-        margin: 0;
-    }
-    .nav{
-        width: 25vw;
-    }
-    .card{
-        max-width: 12rem;
-        height: 17vw;
-    }
-    .sect{
-      margin: 22% 0 10% 10%;
-    }
-    .divider{
-      margin-left: 0%;
-      width: 100%;
-  } 
-  .buttons{
-      margin-top: 0em;
-
-  }
-}
-
-  @media (max-width: 1200px) {
-      .columns{
-          margin: 0 180px !important;
-      }
-      .countTable{
-          margin: 0;
-          width: 70vw;
-      }
-      .navCont{
-          margin: 0;
-      }
-      .nav{
-          width: 45vw;
-      }
-      .card{
-          max-width: 12rem;
-          height: 30vw;
-      }
-      .sect{
-        margin: 31% 0 10% 10%;
-      }
-      .divider{
-        margin-left: 0%;
-        width: 100%;
-    }
-    .buttons{
-        margin-top: 1em;
-    }
-  }
-    @media (min-width:1401px) {
-        .card {
-            max-width: 14rem !important;
-            height: 22vw !important;
-        }
-    }
+  
 
  .is-active{
      font-family: galBold;  
@@ -516,10 +405,7 @@ section p {
       width: 99vw;
       text-align: center;
       padding: 15px;
-  }
-  @media (min-width: 1600px) {
-   
-  }
+  } 
   .tabla{
     margin-top: 2em;
     width: 100%;
@@ -602,4 +488,294 @@ section p {
   }
   #aprobar{
       float: right;
+  }  
+ 
+/*max 450*/
+  @media screen and (max-width:450px) {
+      .cDesktop{
+            display: none;
+      }
+      .banner{
+            width: 100%;
+            height: auto;
+      }
+      .cont{
+            width: 100%;
+            height: auto;
+            text-align: center;
+        }
+      #aprobar{
+        width: 80vw;
+        float: none !important;
+        margin: 2em 0;
+        }
+      .Table{
+          font-size: small;
+          width: 90vw !important;
+          margin: 0 0 2em 1em !important;
+      } 
+      .linea{
+            width: 80vw;
+            margin:  0 1.5em ;
+            height: 2px;
+            border: solid 1px #ccc;
+      }
+      table, th, td {
+        border:none;
+        margin-bottom: 2em !important;
+    }
+    .navCont{
+        width: 80vw;
+        height: auto;
+        margin: 0;
+        padding: 0;
+        font-size: smaller;
+    } 
+    .nav{
+        width: 80vw !important;
+        margin: 2em;
+        padding: 0;
+        font-size: small;
+    }
+    .test{
+        margin: 2em 0;
+    }
+    .columnsM{
+        overflow-x: scroll !important;
+        display: flex;
+        justify-content: space-between;
+        padding: 0 ;
+        margin: 0 !important;
+        width: 80vw; 
+    }
+    .card-description{
+        margin: 1em 0%;
+        padding: 0;
+    }
+    .card-description>p{
+        font-size: small;
+    }
+    .columnM{
+        margin: 0;
+    }
+    .column{
+        margin: 0 1em;
+    }
+    .card-image{
+        max-width: 40vw;
+    }
+    .card-description>a{
+        margin: 0 10px;
+    }
+    .boton{
+        padding: 0 1.5em;
+        border-radius: 0 !important;
+    }
+    .azul{
+        padding-bottom: 5px;
+    }
+    .stakeAll{
+        background-color: #381f49;
+        color: #eee;
+        font-family: gloria;
+        font-size: 1em;
+        margin: 1em;
+        padding: 0.5em;
+    }
+    .spa{
+        margin: 1.5em  !important;
+    }
+    .claimM{
+        width: 100vw;
+        margin: 0;
+        padding: 0;
+    }
+
+    .faqM{
+        width: 100vw;
+        margin: 0;
+        padding: 0;
+        height: 30%;
+        background-color: #111;
+        color: #e4e4e4;
+    }
+    .collaM{
+        width: 90vw;
+        margin: 0 1em ;
+        padding: 0;
+        height: 30%;
+        background-color: #111;
+        color: #e4e4e4;
+    }
+    .collaM>button{
+        color: #fff;
+    }
+    .collaM>button:active{
+        background-color:#111 ;
+    }
+    .collaM>button:focus{
+        outline: none;
+    }
+    .collaM>button:hover{
+        outline: none;
+         background-color:#111 ;
+    } 
+    .collaM>.collapseButt:active{
+        background-color:#111 ;
+    }
+    .collaM>.collapseButt:focus{
+        outline: none;
+    }
+    .collaM>.collapseButt:hover{
+        outline: none;
+         background-color:#111 ;
+    } 
+    
+    .collaM>.collapsible:hover{
+        outline: none;
+         background-color:#111 ;
+    } 
+    .collaM>.collapsible:active{
+        background-color:#111 ;
+    }
+    .collaM>.collapsible:focus{
+        outline: none;
+    }
+    .collaM>.collapsible:hover{
+        outline: none;
+         background-color:#111 ;
+    } 
+    .active{
+        background-color:#111 !important ;
+    }
+
+}
+/*max 450*/
+/*min 451*/
+    @media screen and (min-width:451px) {
+        .cMobile{
+                display:none;
+        } 
+    }
+/*min 451*/
+
+/*min 1200*/
+@media (min-width:1200px) {
+    .nav-bar{
+        top: 2em;
+    }
+  .countTable { 
+      width: 60vw !important;
   }
+  .card {
+      height: 23vw !important;
+  }
+  .sect {
+      margin: 20% 0 10% 10% !important;
+  }
+}
+/*min 1200*/
+/* max 1200 */
+@media (max-width: 1200px) {
+  .columns{
+      margin: 0 180px !important;
+  }
+  .countTable{
+      margin: 0;
+      width: 70vw;
+  }
+  .navCont{
+      margin: 0;
+  }
+  .nav{
+      width: 45vw;
+  }
+  .card{
+      max-width: 12rem;
+      height: 30vw;
+  }
+  .sect{
+    margin: 31% 0 10% 10%;
+  }
+  .divider{
+    margin-left: 0%;
+    width: 100%;
+}
+.buttons{
+    margin-top: 1em !important;
+}
+}
+/*max 1200 */
+/*max 1400*/
+@media (max-width: 1400px) {
+  .columns{
+      margin: 0 200px;
+  }
+  .countTable{
+      margin: 0;
+      width: 40vw;
+  }
+  .navCont{
+      margin: 0;
+  }
+  .nav{
+      width: 40vw;
+  }
+  .card{
+      max-width: 12rem;
+      height: 17vw;
+  }
+  .sect{
+    margin: 22% 0 10% 10%;
+  }
+  .divider{
+    margin-left: 0%;
+    width: 100%;
+} 
+.buttons{
+    margin-top: 0em;
+
+}
+}
+/* max 1400 */
+
+/*min 1401*/
+@media (min-width:1401px) {
+  .card {
+      max-width: 14rem !important;
+      height: 22vw !important;
+  }
+}
+/*min 1401*/  
+/*min 1600*/
+@media (min-width:1600px) {
+  .buttons{
+      margin-top: 1em;
+  }
+  .columns{
+      margin: 0 300px !important;
+  }
+  .countTable { 
+      width: 60vw !important;
+  }
+  .card {
+      
+  height: 18vw !important;
+  width: 11vw !important;
+  }
+  .sect {
+      margin: 21% 0 10% 10% !important;
+  }
+  .imgClaim>img {
+      width: 35vw;
+  }
+  .sect {
+      margin: 19% 0 10% 10% !important;
+  }
+  .columns {
+  margin: 0 260px !important;
+}
+
+}
+  /*min 1600*/
+
