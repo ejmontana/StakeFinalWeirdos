@@ -22,8 +22,8 @@ var balanceStake;
 var TotalMinado;
 var tokenContract;
 const NftsAddress = '0xAf5d3183de674004bCD656aFA2dACD3B31EB9696'
-const stakeAddress = '0xe7BA75C831f54b39aF0051Be3f272e4Ea69A1870'
-const tokenAddress = '0x8888c0B3561084A2E55560e477E453CBD68731C4' // mainnet busd
+const stakeAddress = '0x86fF1ce1b0c89466f85Bbd370f4e0E05805441d1'
+const tokenAddress = '0xC586a4A0dB0bC1169d490b8FBF0633cC06d0f0d3' // mainnet busd
 
 const NftsABI = [{"inputs":[{"internalType":"string","name":"_name","type":"string"},{"internalType":"string","name":"_symbol","type":"string"},{"internalType":"string","name":"_initBaseURI","type":"string"},{"internalType":"string","name":"_initNotRevealedUri","type":"string"}],"stateMutability":"nonpayable","type":"constructor"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"owner","type":"address"},{"indexed":true,"internalType":"address","name":"approved","type":"address"},{"indexed":true,"internalType":"uint256","name":"tokenId","type":"uint256"}],"name":"Approval","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"owner","type":"address"},{"indexed":true,"internalType":"address","name":"operator","type":"address"},{"indexed":false,"internalType":"bool","name":"approved","type":"bool"}],"name":"ApprovalForAll","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"previousOwner","type":"address"},{"indexed":true,"internalType":"address","name":"newOwner","type":"address"}],"name":"OwnershipTransferred","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"from","type":"address"},{"indexed":true,"internalType":"address","name":"to","type":"address"},{"indexed":true,"internalType":"uint256","name":"tokenId","type":"uint256"}],"name":"Transfer","type":"event"},{"inputs":[{"internalType":"address","name":"","type":"address"}],"name":"addressMintedBalance","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"to","type":"address"},{"internalType":"uint256","name":"tokenId","type":"uint256"}],"name":"approve","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"owner","type":"address"}],"name":"balanceOf","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"baseExtension","outputs":[{"internalType":"string","name":"","type":"string"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"baseURI","outputs":[{"internalType":"string","name":"","type":"string"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"cost","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"tokenId","type":"uint256"}],"name":"getApproved","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"owner","type":"address"},{"internalType":"address","name":"operator","type":"address"}],"name":"isApprovedForAll","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"_user","type":"address"}],"name":"isWhitelisted","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"maxMintAmount","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"maxSupply","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"_mintAmount","type":"uint256"}],"name":"mint","outputs":[],"stateMutability":"payable","type":"function"},{"inputs":[],"name":"name","outputs":[{"internalType":"string","name":"","type":"string"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"nftPerAddressLimit","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"notRevealedUri","outputs":[{"internalType":"string","name":"","type":"string"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"onlyWhitelisted","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"owner","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"tokenId","type":"uint256"}],"name":"ownerOf","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"bool","name":"_state","type":"bool"}],"name":"pause","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"paused","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"renounceOwnership","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"reveal","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"revealed","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"from","type":"address"},{"internalType":"address","name":"to","type":"address"},{"internalType":"uint256","name":"tokenId","type":"uint256"}],"name":"safeTransferFrom","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"from","type":"address"},{"internalType":"address","name":"to","type":"address"},{"internalType":"uint256","name":"tokenId","type":"uint256"},{"internalType":"bytes","name":"_data","type":"bytes"}],"name":"safeTransferFrom","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"operator","type":"address"},{"internalType":"bool","name":"approved","type":"bool"}],"name":"setApprovalForAll","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"string","name":"_newBaseExtension","type":"string"}],"name":"setBaseExtension","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"string","name":"_newBaseURI","type":"string"}],"name":"setBaseURI","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint256","name":"_newCost","type":"uint256"}],"name":"setCost","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint256","name":"_limit","type":"uint256"}],"name":"setNftPerAddressLimit","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"string","name":"_notRevealedURI","type":"string"}],"name":"setNotRevealedURI","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"bool","name":"_state","type":"bool"}],"name":"setOnlyWhitelisted","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint256","name":"_newmaxMintAmount","type":"uint256"}],"name":"setmaxMintAmount","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"bytes4","name":"interfaceId","type":"bytes4"}],"name":"supportsInterface","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"symbol","outputs":[{"internalType":"string","name":"","type":"string"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"index","type":"uint256"}],"name":"tokenByIndex","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"owner","type":"address"},{"internalType":"uint256","name":"index","type":"uint256"}],"name":"tokenOfOwnerByIndex","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"tokenId","type":"uint256"}],"name":"tokenURI","outputs":[{"internalType":"string","name":"","type":"string"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"totalSupply","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"from","type":"address"},{"internalType":"address","name":"to","type":"address"},{"internalType":"uint256","name":"tokenId","type":"uint256"}],"name":"transferFrom","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"newOwner","type":"address"}],"name":"transferOwnership","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"_owner","type":"address"}],"name":"walletOfOwner","outputs":[{"internalType":"uint256[]","name":"","type":"uint256[]"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address[]","name":"_users","type":"address[]"}],"name":"whitelistUsers","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint256","name":"","type":"uint256"}],"name":"whitelistedAddresses","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"withdraw","outputs":[],"stateMutability":"payable","type":"function"}]
 
@@ -212,7 +212,7 @@ async function loadAccount() {
     imgURL = "https://uw-app-k5iwr.ondigitalocean.app/metadata/" + balanceStake[e] +".json"
     axios.get(imgURL)
       .then((response) => {
-    console.log(imgURL)
+   // console.log(imgURL)
 
         // función que se ejecutará al recibir una respuesta
         var nftsMis = response.data.image
@@ -223,7 +223,7 @@ async function loadAccount() {
            document.getElementById("Your_Reward").textContent = TokenUser;
            document.getElementById("Your_Reward_M").textContent = TokenUser;
           
-           console.log(TokenUser)
+          // console.log(TokenUser)
            const nftdiv = document.getElementById("carousel-img2") 
            const insertarnft = document.createElement("div")
            insertarnft.classList.add("column")
@@ -236,7 +236,7 @@ async function loadAccount() {
              <img src=${nftsMis}" alt="Psychopomp" />
            </div>
            <div class="card-description">
-             <h2>Weirdos #${balanceStake[e]}</h2>
+             <h2>Weirdo #${balanceStake[e]}</h2>
              <p>Total Mined ${TotalMinado}</p>
              <a onclick="UnStake(${balanceStake[e]})" class="boton azul">UnStake</a >
              
@@ -260,7 +260,7 @@ async function loadAccount() {
     imgURL = "https://uw-app-k5iwr.ondigitalocean.app/metadata/" + balanceStake[e] +".json"
     axios.get(imgURL)
       .then((response) => {
-    console.log(imgURL)
+   // console.log(imgURL)
 
         // función que se ejecutará al recibir una respuesta
         var nftsMis = response.data.image
@@ -268,6 +268,7 @@ async function loadAccount() {
         stake.methods.getCurrentStakeEarned(balanceStake[e]).call().then(userBalance => {
            TotalMinado = web3.utils.fromWei(userBalance);
            TokenUser  = parseFloat(TokenUser) + parseFloat(TotalMinado) ;
+           TokenUser = web3.utils.fromWei(TokenUser)
            document.getElementById("Your_Reward").textContent = TokenUser;
            document.getElementById("Your_Reward_M").textContent = TokenUser;
           
@@ -284,7 +285,7 @@ async function loadAccount() {
              <img src=${nftsMis}" alt="Psychopomp" />
            </div>
            <div class="card-description">
-             <h2>Weirdos #${balanceStake[e]}</h2>
+             <h2>Weirdo #${balanceStake[e]}</h2>
              <p>Total Mined ${TotalMinado}</p>
              <a onclick="UnStake(${balanceStake[e]})" class="boton azul">UnStake</a >
              
@@ -308,7 +309,7 @@ async function loadAccount() {
     imgURL = "https://uw-app-k5iwr.ondigitalocean.app/metadata/" + balanceStake[e] +".json"
     axios.get(imgURL)
       .then((response) => {
-    console.log(imgURL)
+    //console.log(imgURL)
 
         // función que se ejecutará al recibir una respuesta
         var nftsMis = response.data.image
@@ -319,7 +320,7 @@ async function loadAccount() {
            document.getElementById("Your_Reward").textContent = TokenUser;
            document.getElementById("Your_Reward_M").textContent = TokenUser;
           
-           console.log(TokenUser)
+          // console.log(TokenUser)
            const nftdiv = document.getElementById("carousel-img2") 
            const insertarnft = document.createElement("div")
            insertarnft.classList.add("column")
@@ -369,9 +370,26 @@ async function loadAccount() {
   }).catch((err) => {
     console.log(err)
   }); 
+
+
+  currentAddr = accounts[0]
+  var connectedAddr = currentAddr[0] + 
+  currentAddr[1] + 
+  currentAddr[2] + 
+  currentAddr[3] + 
+  currentAddr[4] + '...' +
+  currentAddr[currentAddr.length-5] + 
+  currentAddr[currentAddr.length-4] + 
+  currentAddr[currentAddr.length-3] + 
+  currentAddr[currentAddr.length-2] + 
+  currentAddr[currentAddr.length-1]
+
+    console.log(connectedAddr)
     document.getElementById("Your_Weirdos").textContent = balance;
     document.getElementById("Staked").textContent = balanceStake.length;
     document.getElementById("Total_Stake").textContent = totalstaked;
+    document.getElementById("connected").textContent = connectedAddr;
+
 
     document.getElementById("Your_Weirdos_M").textContent = balance;
     document.getElementById("Staked_M").textContent = balanceStake.length;

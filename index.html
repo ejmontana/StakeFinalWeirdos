@@ -154,8 +154,8 @@
         </button>
 
         <button class="button" >
-          <a onclick="connectWallet()" class="" id="Connected" type="button" >
-            <strong>CONNECT</strong>
+          <a onclick="connectWallet()" class="" id="" type="button" >
+            <strong id="connected">CONNECT</strong>
           </a>
         </button>
         
@@ -235,7 +235,8 @@
   </div>
   <div class="preImgClaim" > 
   <div class="imgClaim">
-    <img src="./img/Claim.png" alt="Claim"> <br/>
+    <a onclick="UnStakeALL()" class="imgClaim"><img src="img/Claim.png" alt="Claim"></a>
+     <br/>
     <span>Claiming your rewards will unstake your weirdos, but you can stake again.</span>
   <div class="colla">
     <button type="button" class="collapsible collapseButt active">+ How many weirdos can I stake?</button>
@@ -263,7 +264,7 @@
 </div> 
 </div>
 
-<div class="footer"> <img src="./img/evil devils.png" alt=""> 
+<div class="footer"> <img src="img/evil devils.png" alt=""> 
 </div>
 </div> 
 </div>
