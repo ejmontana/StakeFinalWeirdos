@@ -9,10 +9,12 @@ const buttonRight = document.getElementById('slideRight');
 const buttonLeft = document.getElementById('slideLeft');
 
 buttonRight.onclick = function () {
-  $('html, body').animate(document.getElementById('carousel-img1').scrollLeft += 200)
+	$('html, body').animate(document.getElementById('carousel-img1').scrollLeft += 200)
+	$('html, body').animate(document.getElementById('carousel-img2').scrollLeft += 200)
 };
 buttonLeft.onclick = function () {
   document.getElementById('carousel-img1').scrollLeft -= 200;
+  document.getElementById('carousel-img2').scrollLeft -= 200;
 };
 ///
 carRight.onclick = function () {
@@ -22,6 +24,8 @@ carRight.onclick = function () {
 carLeft.onclick = function () {
   carSld.scrollLeft -= 220;
 };
+
+
 
 // This is "probably" IE9 compatible but will need some fallbacks for IE8
 // - (event listeners, forEach loop)
