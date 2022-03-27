@@ -218,11 +218,7 @@ async function loadAccount() {
         var nftsMis = response.data.image
    
         stake.methods.getCurrentStakeEarned(balanceStake[e]).call().then(userBalance => {
-           TotalMinado = web3.utils.fromWei(userBalance);
-           TokenUser  = parseFloat(TokenUser) + parseFloat(TotalMinado.toFixed(2)) ;
-           
-           document.getElementById("Your_Reward").textContent = TokenUser.toFixed(2);
-           document.getElementById("Your_Reward_M").textContent = TokenUser.toFixed(2);
+   
           
           // console.log(TokenUser)
            const nftdiv = document.getElementById("carousel-img2") 
@@ -267,12 +263,7 @@ async function loadAccount() {
         var nftsMis = response.data.image
    
         stake.methods.getCurrentStakeEarned(balanceStake[e]).call().then(userBalance => {
-           TotalMinado = web3.utils.fromWei(userBalance);
-           TokenUser  = parseFloat(TokenUser) + parseFloat(TotalMinado) ;
-           TokenUser = web3.utils.fromWei(TokenUser)
-           document.getElementById("Your_Reward").textContent = TokenUser.toFixed(2);
-           document.getElementById("Your_Reward_M").textContent = TokenUser.toFixed(2);
-          
+   
            console.log(TokenUser)
            const nftdiv = document.getElementById("carousel-img2-M") 
            const insertarnft = document.createElement("div")
@@ -390,6 +381,7 @@ async function loadAccount() {
     document.getElementById("Staked").textContent = balanceStake.length;
     document.getElementById("Total_Stake").textContent = totalstaked;
     document.getElementById("connected").textContent = connectedAddr;
+    document.getElementById("connected2").textContent = connectedAddr;
 
 
     document.getElementById("Your_Weirdos_M").textContent = balance;
