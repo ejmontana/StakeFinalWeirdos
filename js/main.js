@@ -291,8 +291,55 @@ async function loadAccount() {
            </div>
          </div> 
        ` 
-           nftdiv.appendChild(insertarnft)
-           nftdivM.appendChild(insertarnft)
+           nftdiv.appendChild(insertarnft) 
+         })
+         .catch(function (error) {
+           // función para capturar el error
+           console.log(error);
+         })
+
+        }).catch((err) => {
+          console.log(err)
+        }); 
+  }
+
+
+  for (let e = 0; e < balanceStake.length; e++) {
+    imgURL = "https://uw-app-k5iwr.ondigitalocean.app/metadata/" + balanceStake[e] +".json"
+    axios.get(imgURL)
+      .then((response) => {
+    console.log(imgURL)
+
+        // función que se ejecutará al recibir una respuesta
+        var nftsMis = response.data.image
+   
+        stake.methods.getCurrentStakeEarned(balanceStake[e]).call().then(userBalance => {
+           TotalMinado = web3.utils.fromWei(userBalance);
+           TokenUser  = parseFloat(TokenUser) + parseFloat(TotalMinado) ;
+           document.getElementById("Your_Reward").textContent = TokenUser;
+           document.getElementById("Your_Reward_M").textContent = TokenUser;
+          
+           console.log(TokenUser)
+           const nftdiv = document.getElementById("carousel-img2") 
+           const insertarnft = document.createElement("div")
+           insertarnft.classList.add("column")
+           insertarnft.classList.add("is-one-quarter-desktop")
+           insertarnft.classList.add("is-half-tablet")
+      
+           insertarnft.innerHTML = ` 
+           <div class="card is-loaded">
+           <div class="card-image is-loaded"  style="background-image: url(${nftsMis})" data-image-full="${nftsMis}">
+             <img src=${nftsMis}" alt="Psychopomp" />
+           </div>
+           <div class="card-description">
+             <h2>Weirdos #${balanceStake[e]}</h2>
+             <p>Total Mined ${TotalMinado}</p>
+             <a onclick="UnStake(${balanceStake[e]})" class="boton azul">UnStake</a >
+             
+           </div>
+         </div> 
+       ` 
+           nftdiv.appendChild(insertarnft) 
          })
          .catch(function (error) {
            // función para capturar el error
