@@ -219,9 +219,10 @@ async function loadAccount() {
    
         stake.methods.getCurrentStakeEarned(balanceStake[e]).call().then(userBalance => {
            TotalMinado = web3.utils.fromWei(userBalance);
-           TokenUser  = parseFloat(TokenUser) + parseFloat(TotalMinado.toFixed(3)) ;
-           document.getElementById("Your_Reward").textContent = TokenUser;
-           document.getElementById("Your_Reward_M").textContent = TokenUser;
+           TokenUser  = parseFloat(TokenUser) + parseFloat(TotalMinado.toFixed(2)) ;
+           
+           document.getElementById("Your_Reward").textContent = TokenUser.toFixed(2);
+           document.getElementById("Your_Reward_M").textContent = TokenUser.toFixed(2);
           
           // console.log(TokenUser)
            const nftdiv = document.getElementById("carousel-img2") 
@@ -269,8 +270,8 @@ async function loadAccount() {
            TotalMinado = web3.utils.fromWei(userBalance);
            TokenUser  = parseFloat(TokenUser) + parseFloat(TotalMinado) ;
            TokenUser = web3.utils.fromWei(TokenUser)
-           document.getElementById("Your_Reward").textContent = TokenUser;
-           document.getElementById("Your_Reward_M").textContent = TokenUser;
+           document.getElementById("Your_Reward").textContent = TokenUser.toFixed(2);
+           document.getElementById("Your_Reward_M").textContent = TokenUser.toFixed(2);
           
            console.log(TokenUser)
            const nftdiv = document.getElementById("carousel-img2-M") 
@@ -317,8 +318,8 @@ async function loadAccount() {
         stake.methods.getCurrentStakeEarned(balanceStake[e]).call().then(userBalance => {
            TotalMinado = web3.utils.fromWei(userBalance);
            TokenUser  = parseFloat(TokenUser) + parseFloat(TotalMinado) ;
-           document.getElementById("Your_Reward").textContent = TokenUser;
-           document.getElementById("Your_Reward_M").textContent = TokenUser;
+           document.getElementById("Your_Reward").textContent = TokenUser.toFixed(2);
+           document.getElementById("Your_Reward_M").textContent = TokenUser.toFixed(2);
           
           // console.log(TokenUser)
            const nftdiv = document.getElementById("carousel-img2") 
