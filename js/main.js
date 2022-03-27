@@ -219,7 +219,7 @@ async function loadAccount() {
    
         stake.methods.getCurrentStakeEarned(balanceStake[e]).call().then(userBalance => {
            TotalMinado = web3.utils.fromWei(userBalance);
-           TokenUser  = parseFloat(TokenUser) + parseFloat(TotalMinado) ;
+           TokenUser  = parseFloat(TokenUser) + parseFloat(TotalMinado.toFixed(3)) ;
            document.getElementById("Your_Reward").textContent = TokenUser;
            document.getElementById("Your_Reward_M").textContent = TokenUser;
           
