@@ -185,7 +185,7 @@ ul {
 }
 
 .card-description { 
-    display: block;
+  display: block;
 	padding: 1em 0.5em;
 	color: #515151;
 	text-decoration: none;
@@ -489,7 +489,12 @@ section p {
   #aprobar{
       float: right;
   }  
- 
+ @media(max-width:425px) {
+  .card-description{
+    margin-top: 0 !important;
+  }
+
+}
 /*max 450*/
   @media screen and (max-width:450px) {
       .cDesktop{
@@ -515,10 +520,10 @@ section p {
           margin: 0 0 2em 1em !important;
       } 
       .linea{
-            width: 80vw;
-            margin:  0 1.5em ;
-            height: 2px;
-            border: solid 1px #ccc;
+        width: 80vw;
+        height: 2px;
+        border: solid 1px #ccc;
+        margin-left: 10vw !important;
       }
       table, th, td {
         border:none;
@@ -577,12 +582,12 @@ section p {
         background-color: #381f49;
         color: #eee;
         font-family: gloria;
-        font-size: 1em;
+        font-size: 0.8em;
         margin: 1em;
         padding: 0.5em;
     }
     .spa{
-        margin: 1.5em  !important;
+      margin-bottom: 1.5em;
     }
     .claimM{
         width: 100vw;
@@ -671,7 +676,7 @@ section p {
 
   }
 
-  /*max 450*/
+/*max 450*/
 /*min 451*/
     @media screen and (min-width:451px) {
         .cMobile{
