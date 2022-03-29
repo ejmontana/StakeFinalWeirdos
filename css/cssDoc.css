@@ -592,9 +592,10 @@ section p {
     }
 
     .faqM{
+        text-align: justify;
         width: 100vw;
         margin: 0;
-        padding: 0;
+        padding: 2em 0;
         height: 30%;
         background-color: #111;
         color: #e4e4e4;
@@ -649,13 +650,28 @@ section p {
         background-color:#111 !important ;
     }
 
-}
-/*max 450*/
+  .footerM{
+    height: 10vw;
+    background-color: #212121;
+    width: 100vw;
+    text-align: center;
+    padding: 0px;
+} 
+.footerM>img{
+    margin:  0.5em 0;
+    width: 70vw;
+    height: auto;
+  }
+  }
+  /*max 450*/
 /*min 451*/
     @media screen and (min-width:451px) {
         .cMobile{
                 display:none;
         } 
+        .columns{
+          justify-content: center !important ;
+        }
     }
 /*min 451*/
 
@@ -678,6 +694,7 @@ section p {
 /* max 1200 */
 @media (max-width: 1200px) {
   .columns{
+      padding-left: 25%;
       margin: 0 180px !important;
   }
   .countTable{
