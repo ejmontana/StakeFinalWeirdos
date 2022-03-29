@@ -538,7 +538,7 @@ section p {
         font-size: small;
     }
     .test{
-        margin: 2em 0;
+        margin: 1em 0;
     }
     .columnsM{
         overflow-x: scroll !important;
@@ -551,21 +551,20 @@ section p {
     .card-description{
         margin: 1em 0%;
         padding: 0;
+        margin-top: -1em;
+
     }
     .card-description>p{
         font-size: small;
     }
     .columnM{
         margin: 0;
-    }
-    .column{
-        margin: 0 1em;
-    }
+    } 
     .card-image{
         max-width: 40vw;
     }
     .card-description>a{
-        margin: 0 10px;
+        margin: 0 ;
     }
     .boton{
         padding: 0 1.5em;
@@ -662,7 +661,16 @@ section p {
     width: 70vw;
     height: auto;
   }
+  .card-image{
+    background-size: contain !important;
   }
+  .column{
+      margin-top: -1.5em;
+      margin-bottom: 1em;
+   }
+
+  }
+
   /*max 450*/
 /*min 451*/
     @media screen and (min-width:451px) {
