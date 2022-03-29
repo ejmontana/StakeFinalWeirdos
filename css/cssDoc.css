@@ -683,7 +683,7 @@ section p {
                 display:none;
         } 
         .columns{
-          justify-content: center !important ;
+          justify-content: left !important
         }
     }
 /*min 451*/
