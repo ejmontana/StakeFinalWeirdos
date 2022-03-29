@@ -683,7 +683,7 @@ section p {
                 display:none;
         } 
         .columns{
-          justify-content: left !important
+          justify-content:   left !important
         }
     }
 /*min 451*/
@@ -706,8 +706,7 @@ section p {
 /*min 1200*/
 /* max 1200 */
 @media (max-width: 1200px) {
-  .columns{
-      padding-left: 25%;
+  .columns{ 
       margin: 0 180px !important;
   }
   .countTable{
