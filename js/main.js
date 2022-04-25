@@ -22,6 +22,7 @@ var balanceStake;
 var TotalMinado;
 var tokenContract;
 const NftsAddress = '0xAf5d3183de674004bCD656aFA2dACD3B31EB9696'
+const NftsAddress2 = '0xAf5d3183de674004bCD656aFA2dACD3B31EB9696'
 const stakeAddress = '0x86fF1ce1b0c89466f85Bbd370f4e0E05805441d1'
 const tokenAddress = '0xC586a4A0dB0bC1169d490b8FBF0633cC06d0f0d3' // mainnet busd
 
