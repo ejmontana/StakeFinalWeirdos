@@ -51,10 +51,10 @@
             </thead>
             <tbody>
               <tr>
-                <th id="Your_Weirdos_M"></th>
-                <th id="Staked_M"></th>
-                <th id="Total_Stake_M"></th>
-                <th id="Your_Reward_M"></th> 
+                <th id="Your_Weirdos_M">0</th>
+                <th id="Staked_M">0</th>
+                <th id="Total_Stake_M">0</th>
+                <th id="Your_Reward_M">0</th> 
               </tr>
             </tbody>
            
@@ -96,6 +96,7 @@
       </p>
       <div class="stakeAll"> <a  onclick="StakeALL()" >STAKE ALL WEIRDOS </a></div>
       <div class="stakeAll"> <a  >UNSTAKE ALL WEIRDOS </a></div>
+    
       <a onclick="UnStakeALL()"><img class="claimM" src="img/Claim.png" alt=""></a>
       
       <div class="faqM">
@@ -188,15 +189,16 @@
             </thead>
             <tbody>
               <tr>
-                <th id="Your_Weirdos"></th>
-                <th id="Staked"></th>
-                <th id="Total_Stake"></th>
-                <th id="Your_Reward"></th> 
+                <th id="Your_Weirdos">0</th>
+                <th id="Staked">0</th>
+                <th id="Total_Stake">0</th>
+                <th id="Your_Reward">0</th> 
                
               </tr>
             </tbody>
             
             <a onclick="NftApro()" id="aprobar" class="boton azul">Approve STAKING</a>
+            <a onclick="NftApro2()" id="aprobar2" class="boton azul" >Approve STAKING Special</a>
           </table> 
 
        <div class="divider"></div>
@@ -213,6 +215,16 @@
                     <span class="span">STAKED WEIRDOS</span>  
                 </a>  
              </li>
+             <div class="StakeSpecial">
+             |
+          </div>
+
+             <li class="StakeSpecial"  id="nft-en-stake-specials"> 
+              <a  onclick="InStakeSpecials()">
+             
+                  <span class="span">STAKED SPECIALS</span>  
+              </a>  
+           </li>
            </ul>
           </div>
           
@@ -229,6 +241,10 @@
             </div>
             <div id="nft-en-stake">
               <div class="columns" id="carousel-img2"></div>
+
+            </div>
+            <div id="nftspecials">
+              <div class="columns" id="carousel-img3"></div>
 
             </div>
         </div>

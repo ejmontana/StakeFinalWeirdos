@@ -123,7 +123,7 @@ ul {
       font-size: 20px;
       display: flex;
       justify-content: space-evenly;
-    width: 30vw;
+    width: 40vw;
     margin: 0%;
   }   
   
@@ -748,7 +748,7 @@ section p {
       margin: 0;
   }
   .nav{
-      width: 40vw;
+      width: 52vw;
   }
   .card{
       max-width: 12rem;
