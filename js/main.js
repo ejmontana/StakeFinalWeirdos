@@ -401,7 +401,7 @@ var  balance2 = await contract2.methods.balanceOf(accounts[0]).call()
              <img src=${nftsMis}" alt="Psychopomp" />
            </div>
            <div class="card-description">
-             <h2>Weirdos #${balanceStake[e]}</h2>
+             <h2>Weirdo #${balanceStake[e]}</h2>
              <p>Total Mined ${TotalMinado}</p>
              <a onclick="UnStake(${balanceStake[e]})" class="boton azul">UnStake</a >
              
@@ -451,7 +451,7 @@ var  balance2 = await contract2.methods.balanceOf(accounts[0]).call()
              <img src=${nftsMis}" alt="Psychopomp" />
            </div>
            <div class="card-description">
-             <h2>Weirdos #${balanceStake2[e]}</h2>
+             <h2>Weirdo #${balanceStake2[e]}</h2>
              <p>Total Mined ${TotalMinado2}</p>
              <a onclick="UnStake2(${balanceStake2[e]})" class="boton azul">UnStake</a >
              
@@ -497,7 +497,7 @@ var  balance2 = await contract2.methods.balanceOf(accounts[0]).call()
              <img src=${nftsMis}" alt="Psychopomp" />
            </div>
            <div class="card-description">
-             <h2>Weirdos #${balanceStake2[e]}</h2>
+             <h2>Weirdo #${balanceStake2[e]}</h2>
              <p>Total Mined ${TotalMinado2}</p>
              <a onclick="UnStake2(${balanceStake2[e]})" class="boton azul">UnStake</a >
              
@@ -570,6 +570,7 @@ async function loadDapp() {
         $("#nftspecials").hide();
         $("#nftspecialsM").hide();
         $("#StakeAllSpecial").hide();
+        $("#StakeAllSpecialM").hide();
         $("#nft-en-stake-M").hide();
         $("#ClaimSpecials").hide();
         $("#ClaimSpecialsM").hide();
@@ -803,6 +804,8 @@ function NoStakeM(){
   $("#ClaimSpecialsM").hide();
   $("#ClaimNormalM").show();
 
+  $("#StakeAllSpecialM").hide();
+  $("#StakeAllnormalM").show();
 }
 function InStakeM(){ 
   $("#NoStakeM").removeClass( "is-active");
@@ -813,6 +816,9 @@ function InStakeM(){
   $("#nft-en-stake-M").show(); 
   $("#ClaimSpecialsM").hide();
   $("#ClaimNormalM").show();
+  
+  $("#StakeAllSpecialM").hide();
+  $("#StakeAllnormalM").show();
 
 }
 function StakeSpecialM(){ 
@@ -825,6 +831,10 @@ function StakeSpecialM(){
   $("#nftspecialsM").show(); 
   $("#ClaimSpecialsM").show();
   $("#ClaimNormalM").hide();
+
+  
+  $("#StakeAllSpecialM").show();
+  $("#StakeAllnormalM").hide();
 
 }
 
