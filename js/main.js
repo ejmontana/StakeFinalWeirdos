@@ -451,7 +451,7 @@ var  balance2 = await contract2.methods.balanceOf(accounts[0]).call()
              <img src=${nftsMis}" alt="Psychopomp" />
            </div>
            <div class="card-description">
-             <h2>Weirdo #${balanceStake2[e]}</h2>
+             <h2>Special Weirdo #${balanceStake2[e]}</h2>
              <p>Total Mined ${TotalMinado2}</p>
              <a onclick="UnStake2(${balanceStake2[e]})" class="boton azul">UnStake</a >
              
@@ -497,7 +497,7 @@ var  balance2 = await contract2.methods.balanceOf(accounts[0]).call()
              <img src=${nftsMis}" alt="Psychopomp" />
            </div>
            <div class="card-description">
-             <h2>Weirdo #${balanceStake2[e]}</h2>
+             <h2>Special Weirdo #${balanceStake2[e]}</h2>
              <p>Total Mined ${TotalMinado2}</p>
              <a onclick="UnStake2(${balanceStake2[e]})" class="boton azul">UnStake</a >
              
