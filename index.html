@@ -59,6 +59,7 @@
             </tbody>
            
             <a onclick="NftApro()" id="aprobarM" class="boton azul">Approve STAKING</a>
+            <a onclick="NftApro2()" id="aprobarMN" class="boton azul">Approve Specials STAKING</a>
           </table>  
           <div class="linea"> </div>
           <div class="navCont">
@@ -74,6 +75,16 @@
                     <span class="span">STAKED WEIRDOS</span>  
                 </a>  
              </li>
+             <div class="StakeSpecialM">
+              |
+           </div>
+ 
+              <li class="StakeSpecialM"  id="nft-en-stake-specialsM"> 
+               <a  onclick="StakeSpecialM()">
+              
+                   <span class="span">WEIRDO SPECIALS</span>  
+               </a>  
+            </li>
            </ul>
           </div>
           <div class="test">
@@ -86,6 +97,11 @@
                     <div class="columnsM" id="carousel-img2-M"></div>
       
                   </div>
+                  <div id="nftspecialsM">
+                    <div class="columnsM" id="carousel-img3-M"></div>
+                    
+                  </div>
+              
               </div>
             </div> 
           </div> 
@@ -95,9 +111,12 @@
         You own a lot of Weirdos? Save time and gas!
       </p>
       <div class="stakeAll"> <a  onclick="StakeALL()" >STAKE ALL WEIRDOS </a></div>
-      <div class="stakeAll"> <a  >UNSTAKE ALL WEIRDOS </a></div>
+      <div class="stakeAll"> <a  onclick="UnStakeALL()">UNSTAKE ALL WEIRDOS </a></div>
     
-      <a onclick="UnStakeALL()"><img class="claimM" src="img/Claim.png" alt=""></a>
+      <a onclick="Claim()" id="ClaimNormalM"><img class="claimM" src="img/Claim.png" alt=""></a>
+      <a onclick="Claim2()" class="imgClaim2" id="ClaimSpecialsM"><img src="img/Claimspecials.png" alt="Claim"></a>
+
+
       
       <div class="faqM">
         <div class="collaM">
@@ -222,7 +241,7 @@
              <li class="StakeSpecial"  id="nft-en-stake-specials"> 
               <a  onclick="InStakeSpecials()">
              
-                  <span class="span">STAKED SPECIALS</span>  
+                  <span class="span">WEIRDO SPECIALS</span>  
               </a>  
            </li>
            </ul>
@@ -245,25 +264,33 @@
             </div>
             <div id="nftspecials">
               <div class="columns" id="carousel-img3"></div>
-
+              
             </div>
+        
         </div>
       </div> 
     </div> 
- 
+  
     <button id="slideLeft" type="button" class="tri arrow-left">   </button>
     <button id="slideRight" type="button" class="tri arrow-right">  </button>
 
  
   
 <div class="contClaim">
-  <div class="separator"><p class="all" >You own a lot of weirdos? Save time and gas, just <a onclick="StakeALL()"><b>STAKE ALL AT ONCE</b></a>  or <a onclick="UnStakeALL()"><b>UNSTAKE ALL AT ONCE </b></a>  </p>
+  <div class="separator" id="StakeAllnormal"><p class="all" >You own a lot of weirdos? Save time and gas, just <a onclick="StakeALL()"><b>STAKE ALL AT ONCE</b></a>  or <a onclick="UnStakeALL()"><b>UNSTAKE ALL AT ONCE </b></a>  </p>
   </div>
+
+    <div class="separator" id="StakeAllSpecial"><p class="all" >You own a lot of weirdos Specials? Save time and gas, just <a onclick="StakeALL2()"><b>STAKE ALL AT ONCE</b></a>  or <a onclick="UnStakeALL2()"><b>UNSTAKE ALL AT ONCE </b></a>  </p>
+    </div>
+  
+
+
+
   <div class="preImgClaim" > 
   <div class="imgClaim">
-    <a onclick="UnStakeALL()" class="imgClaim"><img src="img/Claim.png" alt="Claim"></a>
+    <a onclick="Claim()" class="imgClaim" id="ClaimNormal"><img src="img/Claim.png" alt="Claim"></a>
+    <a onclick="Claim2()" class="imgClaim" id="ClaimSpecials"><img src="img/Claimspecials.png" alt="Claim"></a>
      <br/>
-    <span>Claiming your rewards will unstake your weirdos, but you can stake again.</span>
   <div class="colla">
     <button type="button" class="collapsible collapseButt active">+ How many weirdos can I stake?</button>
     <div class="content" style="display: block;" >

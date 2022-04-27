@@ -20,13 +20,15 @@ var TokenUser = 0;
 var misNftsID = [];
 var misNftsID2 = [];
 var iddeltango;
-var balanceStake;
+let balanceStake;
+let balanceStake2;
 var TotalMinado;
 var tokenContract;
 var contract2
+var totalstaked;
 const NftsAddress = '0xAf5d3183de674004bCD656aFA2dACD3B31EB9696'
 const NftsAddress2 = '0x6b01FEF520818A439d281cf7b03EE2e1e0A32c4A'
-const stakeAddress = '0x9Ea974DcC7551021Ec4B26999a53b38B4FbEaA22'
+const stakeAddress = '0x783f9ABCfb2467389C10b20bD3751b0F610dDdF7'
 const tokenAddress = '0xC586a4A0dB0bC1169d490b8FBF0633cC06d0f0d3' // mainnet busd
 
 const NftsABI = [{"inputs":[{"internalType":"string","name":"_name","type":"string"},{"internalType":"string","name":"_symbol","type":"string"},{"internalType":"string","name":"_initBaseURI","type":"string"},{"internalType":"string","name":"_initNotRevealedUri","type":"string"}],"stateMutability":"nonpayable","type":"constructor"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"owner","type":"address"},{"indexed":true,"internalType":"address","name":"approved","type":"address"},{"indexed":true,"internalType":"uint256","name":"tokenId","type":"uint256"}],"name":"Approval","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"owner","type":"address"},{"indexed":true,"internalType":"address","name":"operator","type":"address"},{"indexed":false,"internalType":"bool","name":"approved","type":"bool"}],"name":"ApprovalForAll","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"previousOwner","type":"address"},{"indexed":true,"internalType":"address","name":"newOwner","type":"address"}],"name":"OwnershipTransferred","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"from","type":"address"},{"indexed":true,"internalType":"address","name":"to","type":"address"},{"indexed":true,"internalType":"uint256","name":"tokenId","type":"uint256"}],"name":"Transfer","type":"event"},{"inputs":[{"internalType":"address","name":"","type":"address"}],"name":"addressMintedBalance","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"to","type":"address"},{"internalType":"uint256","name":"tokenId","type":"uint256"}],"name":"approve","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"owner","type":"address"}],"name":"balanceOf","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"baseExtension","outputs":[{"internalType":"string","name":"","type":"string"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"baseURI","outputs":[{"internalType":"string","name":"","type":"string"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"cost","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"tokenId","type":"uint256"}],"name":"getApproved","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"owner","type":"address"},{"internalType":"address","name":"operator","type":"address"}],"name":"isApprovedForAll","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"_user","type":"address"}],"name":"isWhitelisted","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"maxMintAmount","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"maxSupply","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"_mintAmount","type":"uint256"}],"name":"mint","outputs":[],"stateMutability":"payable","type":"function"},{"inputs":[],"name":"name","outputs":[{"internalType":"string","name":"","type":"string"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"nftPerAddressLimit","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"notRevealedUri","outputs":[{"internalType":"string","name":"","type":"string"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"onlyWhitelisted","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"owner","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"tokenId","type":"uint256"}],"name":"ownerOf","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"bool","name":"_state","type":"bool"}],"name":"pause","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"paused","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"renounceOwnership","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"reveal","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"revealed","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"from","type":"address"},{"internalType":"address","name":"to","type":"address"},{"internalType":"uint256","name":"tokenId","type":"uint256"}],"name":"safeTransferFrom","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"from","type":"address"},{"internalType":"address","name":"to","type":"address"},{"internalType":"uint256","name":"tokenId","type":"uint256"},{"internalType":"bytes","name":"_data","type":"bytes"}],"name":"safeTransferFrom","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"operator","type":"address"},{"internalType":"bool","name":"approved","type":"bool"}],"name":"setApprovalForAll","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"string","name":"_newBaseExtension","type":"string"}],"name":"setBaseExtension","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"string","name":"_newBaseURI","type":"string"}],"name":"setBaseURI","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint256","name":"_newCost","type":"uint256"}],"name":"setCost","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint256","name":"_limit","type":"uint256"}],"name":"setNftPerAddressLimit","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"string","name":"_notRevealedURI","type":"string"}],"name":"setNotRevealedURI","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"bool","name":"_state","type":"bool"}],"name":"setOnlyWhitelisted","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint256","name":"_newmaxMintAmount","type":"uint256"}],"name":"setmaxMintAmount","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"bytes4","name":"interfaceId","type":"bytes4"}],"name":"supportsInterface","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"symbol","outputs":[{"internalType":"string","name":"","type":"string"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"index","type":"uint256"}],"name":"tokenByIndex","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"owner","type":"address"},{"internalType":"uint256","name":"index","type":"uint256"}],"name":"tokenOfOwnerByIndex","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"tokenId","type":"uint256"}],"name":"tokenURI","outputs":[{"internalType":"string","name":"","type":"string"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"totalSupply","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"from","type":"address"},{"internalType":"address","name":"to","type":"address"},{"internalType":"uint256","name":"tokenId","type":"uint256"}],"name":"transferFrom","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"newOwner","type":"address"}],"name":"transferOwnership","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"_owner","type":"address"}],"name":"walletOfOwner","outputs":[{"internalType":"uint256[]","name":"","type":"uint256[]"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address[]","name":"_users","type":"address[]"}],"name":"whitelistUsers","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint256","name":"","type":"uint256"}],"name":"whitelistedAddresses","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"withdraw","outputs":[],"stateMutability":"payable","type":"function"}]
@@ -126,11 +128,10 @@ async function loadAccount() {
   balance = await contract.methods.balanceOf(accounts[0]).call()
 var  balance2 = await contract2.methods.balanceOf(accounts[0]).call()
   balanceStake = await stake.methods.myNfts(accounts[0]).call()
-  var balanceStake2 = await stake.methods.myNfts2(accounts[0]).call()
+  balanceStake2 = await stake.methods.myNfts2(accounts[0]).call()
   totalstaked = await stake.methods.getStakeNftBalance().call()
   var totalstaked2 = await stake.methods.getStakeNftBalance2().call()
  
-  
   //balanceNFT = await contract.methods.tokensOfOwner(accounts[0]).call()
   for(var i = 0; i < balance; i++){
     misNftsID[i] = await contract.methods.tokenOfOwnerByIndex(accounts[0], i).call();
@@ -144,9 +145,19 @@ var  balance2 = await contract2.methods.balanceOf(accounts[0]).call()
   if(balance2 <= 0 && balanceStake2.length <= 0){
     $("#aprobar2").hide();
     $(".StakeSpecial").hide();
+   
  
 
   }
+
+  if(balance2 <= 0 && balanceStake2.length <= 0){
+    $("#aprobarMN").hide();
+    $(".StakeSpecialM").hide();
+   
+ 
+
+  }
+
 
   IsAproba = await contract.methods.isApprovedForAll(accounts[0], stakeAddress).call()
   if (IsAproba) {
@@ -160,7 +171,85 @@ var  balance2 = await contract2.methods.balanceOf(accounts[0]).call()
   if (IsAproba) {
     $("#aprobarM").hide();
   }
+  IsAproba2 = await contract2.methods.isApprovedForAll(accounts[0], stakeAddress).call()
+  if (IsAproba2) {
+    $("#aprobarMN").hide();
+  }
   //console.log(IsAproba)
+
+  for (let e = 0; e < misNftsID2.length; e++) {
+    imgURL = "https://safe-nft-metadata-provider-3nbhr.ondigitalocean.app/metadata/" + misNftsID2[e] +".json"
+    axios.get(imgURL)
+      .then((response) => {
+        // función que se ejecutará al recibir una respuesta
+        var nftsMis = response.data.image
+        console.log(nftsMis)
+        const nftdiv = document.getElementById("carousel-img1") 
+        const insertarnft = document.createElement("div")
+        insertarnft.classList.add("column")
+        insertarnft.classList.add("is-one-quarter-desktop")
+        insertarnft.classList.add("is-half-tablet")
+       
+        insertarnft.innerHTML=` 
+        
+        <div class="card is-loaded">
+        <div class="card-image is-loaded"  style="background-image: url(${nftsMis})" data-image-full="${nftsMis}">
+          <img src=${nftsMis}" alt="Psychopomp" />
+        </div>
+        <div class="card-description">
+          <h2>Weirdo Special #${misNftsID2[e]}</h2>
+          <a onclick="Stake2(${misNftsID2[e]}, 0)" class="boton azul">Stake</a >
+          
+        </div>
+      </div>
+        `; 
+
+
+        nftdiv.appendChild(insertarnft) 
+      })
+      .catch(function (error) {
+        // función para capturar el error
+        console.log(error);
+      })
+  }
+
+  for (let e = 0; e < misNftsID2.length; e++) {
+    imgURL = "https://safe-nft-metadata-provider-3nbhr.ondigitalocean.app/metadata/" + misNftsID2[e] +".json"
+    axios.get(imgURL)
+      .then((response) => {
+        // función que se ejecutará al recibir una respuesta
+        var nftsMis = response.data.image
+      
+        const nftdiv = document.getElementById("carousel-img1-M") 
+        const insertarnft = document.createElement("div")
+        insertarnft.classList.add("column")
+        insertarnft.classList.add("is-one-quarter-desktop")
+        insertarnft.classList.add("is-half-tablet")
+       
+        insertarnft.innerHTML=` 
+        
+        <div class="card is-loaded">
+        <div class="card-image is-loaded"  style="background-image: url(${nftsMis})" data-image-full="${nftsMis}">
+          <img src=${nftsMis}" alt="Psychopomp" />
+        </div>
+        <div class="card-description">
+          <h2>Weirdo Special #${misNftsID2[e]}</h2>
+          <a onclick="Stake2(${misNftsID2[e]}, 0)" class="boton azul">Stake</a >
+          
+        </div>
+      </div>
+        `; 
+
+
+        nftdiv.appendChild(insertarnft) 
+      })
+      .catch(function (error) {
+        // función para capturar el error
+        console.log(error);
+      })
+  }
+
+
   for (let e = 0; e < misNftsID.length; e++) {
     imgURL = "https://uw-app-k5iwr.ondigitalocean.app/metadata/" + misNftsID[e] +".json"
     axios.get(imgURL)
@@ -197,41 +286,8 @@ var  balance2 = await contract2.methods.balanceOf(accounts[0]).call()
       })
   }
 //nfts 2
-  for (let e = 0; e < misNftsID2.length; e++) {
-    imgURL = "https://safe-nft-metadata-provider-3nbhr.ondigitalocean.app/metadata/" + misNftsID2[e] +".json"
-    axios.get(imgURL)
-      .then((response) => {
-        // función que se ejecutará al recibir una respuesta
-        var nftsMis = response.data.image
-        console.log(nftsMis)
-        const nftdiv = document.getElementById("carousel-img1") 
-        const insertarnft = document.createElement("div")
-        insertarnft.classList.add("column")
-        insertarnft.classList.add("is-one-quarter-desktop")
-        insertarnft.classList.add("is-half-tablet")
-       
-        insertarnft.innerHTML=` 
-        
-        <div class="card is-loaded">
-        <div class="card-image is-loaded"  style="background-image: url(${nftsMis})" data-image-full="${nftsMis}">
-          <img src=${nftsMis}" alt="Psychopomp" />
-        </div>
-        <div class="card-description">
-          <h2>Weirdo Special #${misNftsID2[e]}</h2>
-          <a onclick="Stake2(${misNftsID2[e]})" class="boton azul">Stake</a >
-          
-        </div>
-      </div>
-        `; 
 
-
-        nftdiv.appendChild(insertarnft) 
-      })
-      .catch(function (error) {
-        // función para capturar el error
-        console.log(error);
-      })
-  }
+ 
 
   for (let e = 0; e < misNftsID.length; e++) {
     imgURL = "https://uw-app-k5iwr.ondigitalocean.app/metadata/" + misNftsID[e] +".json"
@@ -280,8 +336,11 @@ var  balance2 = await contract2.methods.balanceOf(accounts[0]).call()
         var nftsMis = response.data.image
    
         stake.methods.getCurrentStakeEarned(balanceStake[e]).call().then(userBalance => {
-   
-           console.log(TokenUser)
+          TotalMinado = web3.utils.fromWei(userBalance);
+          TokenUser  = parseFloat(TokenUser) + parseFloat(TotalMinado) ;
+
+          TotalMinado = parseFloat(TotalMinado).toFixed(3)
+           
            const nftdiv = document.getElementById("carousel-img2-M") 
            const insertarnft = document.createElement("div")
            insertarnft.classList.add("column")
@@ -324,12 +383,12 @@ var  balance2 = await contract2.methods.balanceOf(accounts[0]).call()
         var nftsMis = response.data.image
    
         stake.methods.getCurrentStakeEarned(balanceStake[e]).call().then(userBalance => {
-           TotalMinado = web3.utils.fromWei(userBalance);
-           TokenUser  = parseFloat(TokenUser) + parseFloat(TotalMinado) ;
+          TotalMinado = web3.utils.fromWei(userBalance);
+          /*  TokenUser  = parseFloat(TokenUser) + parseFloat(TotalMinado) ;*/
 
            TotalMinado = parseFloat(TotalMinado).toFixed(3)
           
-           console.log("normales " + TokenUser)
+          
            const nftdiv = document.getElementById("carousel-img2") 
            const insertarnft = document.createElement("div")
            insertarnft.classList.add("column")
@@ -376,7 +435,7 @@ var  balance2 = await contract2.methods.balanceOf(accounts[0]).call()
           var TotalMinado2 = web3.utils.fromWei(userBalance2);
           TokenUser  = parseFloat(TokenUser) + parseFloat(TotalMinado2) ;
           TotalMinado2 = parseFloat(TotalMinado2).toFixed(3)
-          console.log("especiales " + TokenUser)
+        
 
           document.getElementById("Your_Reward").textContent = TokenUser.toFixed(2);
           document.getElementById("Your_Reward_M").textContent = TokenUser.toFixed(2);
@@ -394,7 +453,7 @@ var  balance2 = await contract2.methods.balanceOf(accounts[0]).call()
            <div class="card-description">
              <h2>Weirdos #${balanceStake2[e]}</h2>
              <p>Total Mined ${TotalMinado2}</p>
-             <a onclick="UnStake(${balanceStake2[e]})" class="boton azul">UnStake</a >
+             <a onclick="UnStake2(${balanceStake2[e]})" class="boton azul">UnStake</a >
              
            </div>
          </div> 
@@ -410,7 +469,52 @@ var  balance2 = await contract2.methods.balanceOf(accounts[0]).call()
           console.log(err)
         }); 
   }
+  for (let e = 0; e < balanceStake2.length; e++) {
+    imgURL = "https://safe-nft-metadata-provider-3nbhr.ondigitalocean.app/metadata/" + balanceStake2[e] +".json"
+    axios.get(imgURL)
+      .then((response) => {
+    //console.log(imgURL)
+        
+        // función que se ejecutará al recibir una respuesta
+        var nftsMis = response.data.image
+   
+        stake.methods.getCurrentStakeEarned2(balanceStake2[e]).call().then(userBalance2 => {
+          
+          var TotalMinado2 = web3.utils.fromWei(userBalance2);
+          TotalMinado2 = parseFloat(TotalMinado2).toFixed(3)
+          
+          document.getElementById("Your_Reward").textContent = TokenUser.toFixed(2);
+          document.getElementById("Your_Reward_M").textContent = TokenUser.toFixed(2);
+           const nftdiv = document.getElementById("carousel-img3-M") 
+           const insertarnft = document.createElement("div")
+           insertarnft.classList.add("column")
+           insertarnft.classList.add("is-one-quarter-desktop")
+           insertarnft.classList.add("is-half-tablet")
+      
+           insertarnft.innerHTML = ` 
+           <div class="card is-loaded">
+           <div class="card-image is-loaded"  style="background-image: url(${nftsMis})" data-image-full="${nftsMis}">
+             <img src=${nftsMis}" alt="Psychopomp" />
+           </div>
+           <div class="card-description">
+             <h2>Weirdos #${balanceStake2[e]}</h2>
+             <p>Total Mined ${TotalMinado2}</p>
+             <a onclick="UnStake2(${balanceStake2[e]})" class="boton azul">UnStake</a >
+             
+           </div>
+         </div> 
+       ` 
+           nftdiv.appendChild(insertarnft) 
+         })
+         .catch(function (error) {
+           // función para capturar el error
+           console.log(error);
+         })
 
+        }).catch((err) => {
+          console.log(err)
+        }); 
+  }
 
   tokenContract.methods.balanceOf(accounts[0]).call().then(userBalance => {
     let amt = web3.utils.fromWei(userBalance);
@@ -449,9 +553,9 @@ var  balance2 = await contract2.methods.balanceOf(accounts[0]).call()
     document.getElementById("connected2").textContent = connectedAddr;
 
 
-    document.getElementById("Your_Weirdos_M").textContent = balance;
-    document.getElementById("Staked_M").textContent = balanceStake.length;
-    document.getElementById("Total_Stake_M").textContent = totalstaked;
+    document.getElementById("Your_Weirdos_M").textContent = parseFloat(balance) + parseFloat(balance2);
+    document.getElementById("Staked_M").textContent = parseFloat(balanceStake.length)  + parseFloat(balanceStake2.length);
+    document.getElementById("Total_Stake_M").textContent = parseFloat(totalstaked) + parseFloat(totalstaked2);
     
   }
 
@@ -464,7 +568,11 @@ async function loadDapp() {
       if (netId == NETWORK_ID) {
         $("#nft-en-stake").hide();
         $("#nftspecials").hide();
+        $("#nftspecialsM").hide();
+        $("#StakeAllSpecial").hide();
         $("#nft-en-stake-M").hide();
+        $("#ClaimSpecials").hide();
+        $("#ClaimSpecialsM").hide();
 
 
         var awaitContract = async function () {
@@ -516,8 +624,18 @@ const NftApro2 = async () => {
 
 //staker all
 const StakeALL = async () => {
-  console.log(misNftsID)
+
   stake.methods.stakeNFT(misNftsID).send({ from: accounts[0] }).then(result => {
+  loadDapp() 
+  }).catch((err) => {
+    console.log(err)
+  });
+
+
+}
+const StakeALL2 = async () => {
+
+  stake.methods.stakeNFT2(misNftsID2).send({ from: accounts[0] }).then(result => {
   loadDapp() 
   }).catch((err) => {
     console.log(err)
@@ -554,6 +672,7 @@ const Stake2 = async (_idnfts) => {
 
 //Unstaker all
 const UnStakeALL = async () => {
+console.log(balanceStake)
   
   stake.methods.unStakeNFT(balanceStake).send({ from: accounts[0] }).then(result => {
     loadDapp()
@@ -566,11 +685,59 @@ const UnStakeALL = async () => {
 }
 
 
+const UnStakeALL2 = async () => {
+ 
+  stake.methods.unStakeNFT2(balanceStake2).send({ from: accounts[0] }).then(result => {
+    loadDapp()
+
+  }).catch((err) => {
+    console.log(err)
+  });
+
+
+}
+const Claim = async () => {
+ 
+  stake.methods.ClaimTokens(balanceStake).send({ from: accounts[0] }).then(result => {
+  loadDapp() 
+  }).catch((err) => {
+    console.log(err)
+  });
+
+
+}
+
+const Claim2 = async () => {
+  
+  stake.methods.ClaimTokens2(balanceStake2).send({ from: accounts[0] }).then(result => {
+  loadDapp() 
+  }).catch((err) => {
+    console.log(err)
+  });
+
+
+}
+
+
+
 //Unstaker 
 const UnStake = async (_idnfts) => {
 
 
   stake.methods.unStakeNFT([_idnfts]).send({ from: accounts[0] }).then(result => {
+    loadDapp()
+
+  }).catch((err) => {
+    console.log(err)
+  });
+
+
+}
+//Unstaker 
+const UnStake2 = async (_idnfts) => {
+
+
+  stake.methods.unStakeNFT2([_idnfts]).send({ from: accounts[0] }).then(result => {
     loadDapp()
 
   }).catch((err) => {
@@ -587,6 +754,12 @@ function NoStake(){
   $("#nft-en-stake").hide();
   $("#nft-no-stake").show();
   $("#nftspecials").hide();
+  $("#StakeAllSpecial").hide();
+  $("#StakeAllnormal").show();
+  $("#ClaimSpecials").hide();
+  $("#ClaimNormal").show();
+
+ 
 
 }
 function InStake(){ 
@@ -597,6 +770,12 @@ function InStake(){
   $("#nft-no-stake").hide();
   $("#nft-en-stake ").show(); 
   $("#nftspecials").hide();
+  $("#StakeAllSpecial").hide();
+  $("#StakeAllnormal").show();
+  $("#ClaimSpecials").hide();
+  $("#ClaimNormal").show();
+
+
 
 }
 function InStakeSpecials(){ 
@@ -606,23 +785,49 @@ function InStakeSpecials(){
   $("#nft-no-stake").hide();
   $("#nft-en-stake").hide();
   $("#nftspecials").show(); 
+  $("#StakeAllSpecial").show();
+  $("#StakeAllnormal").hide();
+  $("#ClaimNormal").hide();
+  $("#ClaimSpecials").show();
+
 }
 
 
 function NoStakeM(){ 
   $("#InStakeM").removeClass( "is-active");
+  $("#nft-en-stake-specialsM").removeClass( "is-active");
   $("#NoStakeM").addClass("is-active");
   $("#nft-en-stake-M").hide();
+  $("#nftspecialsM").hide();
   $("#nft-no-stake-M").show();
+  $("#ClaimSpecialsM").hide();
+  $("#ClaimNormalM").show();
 
 }
 function InStakeM(){ 
   $("#NoStakeM").removeClass( "is-active");
+  $("#nft-en-stake-specialsM").removeClass( "is-active");
   $("#InStakeM").addClass("is-active");
   $("#nft-no-stake-M").hide();
+  $("#nftspecialsM").hide();
   $("#nft-en-stake-M").show(); 
+  $("#ClaimSpecialsM").hide();
+  $("#ClaimNormalM").show();
 
 }
+function StakeSpecialM(){ 
+  $("#NoStakeM").removeClass( "is-active");
+  $("#InStakeM").removeClass( "is-active");
+
+  $("#nft-en-stake-specialsM").addClass("is-active");
+  $("#nft-no-stake-M").hide();
+  $("#nft-en-stake-M").hide();
+  $("#nftspecialsM").show(); 
+  $("#ClaimSpecialsM").show();
+  $("#ClaimNormalM").hide();
+
+}
+
 
 
 var coll = document.getElementsByClassName("collapsible");

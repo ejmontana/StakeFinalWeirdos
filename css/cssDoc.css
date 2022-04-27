@@ -328,7 +328,9 @@ section p {
   .imgClaim>img{
       width: 40vw;
   }  
-
+  .imgClaim2>img{
+    width: 96vw;
+}  
   .imgClaim{
       display: -webkit-inline-box;
   }
