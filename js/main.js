@@ -23,6 +23,7 @@ var iddeltango;
 let balanceStake;
 let balanceStake2;
 var TotalMinado;
+var TotalMinado2;
 var tokenContract;
 var contract2
 var totalstaked;
@@ -387,7 +388,8 @@ var  balance2 = await contract2.methods.balanceOf(accounts[0]).call()
           /*  TokenUser  = parseFloat(TokenUser) + parseFloat(TotalMinado) ;*/
 
            TotalMinado = parseFloat(TotalMinado).toFixed(3)
-          
+           document.getElementById("Your_Reward").textContent = TokenUser.toFixed(2);
+           document.getElementById("Your_Reward_M").textContent = TokenUser.toFixed(2);
           
            const nftdiv = document.getElementById("carousel-img2") 
            const insertarnft = document.createElement("div")
@@ -433,7 +435,8 @@ var  balance2 = await contract2.methods.balanceOf(accounts[0]).call()
         stake.methods.getCurrentStakeEarned2(balanceStake2[e]).call().then(userBalance2 => {
           
           var TotalMinado2 = web3.utils.fromWei(userBalance2);
-          TokenUser  = parseFloat(TokenUser) + parseFloat(TotalMinado2) ;
+          
+          //TokenUser  = parseFloat(TokenUser) + parseFloat(TotalMinado2) ;
           TotalMinado2 = parseFloat(TotalMinado2).toFixed(3)
         
 
