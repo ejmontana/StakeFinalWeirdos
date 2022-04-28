@@ -493,7 +493,8 @@ section p {
   }  
  @media(max-width:425px) {
   .card-description{
-    margin-top: 0 !important;
+    margin-top: -30px !important;
+   
   }
 
 }
@@ -575,6 +576,7 @@ section p {
     }
     .boton{
         padding: 0 1.5em;
+        margin-top: 14px !important;
         border-radius: 0 !important;
     }
     .azul{

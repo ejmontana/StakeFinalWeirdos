@@ -436,7 +436,7 @@ var  balance2 = await contract2.methods.balanceOf(accounts[0]).call()
           
           var TotalMinado2 = web3.utils.fromWei(userBalance2);
           
-          //TokenUser  = parseFloat(TokenUser) + parseFloat(TotalMinado2) ;
+          TokenUser  = parseFloat(TokenUser) + (parseFloat(TotalMinado2) * 10);
           TotalMinado2 = parseFloat(TotalMinado2).toFixed(3)
         
 
@@ -455,7 +455,7 @@ var  balance2 = await contract2.methods.balanceOf(accounts[0]).call()
            </div>
            <div class="card-description">
              <h2>Special Weirdo #${balanceStake2[e]}</h2>
-             <p>Total Mined ${TotalMinado2}</p>
+             <p>Total Mined ${parseFloat(TotalMinado2)*10}</p>
              <a onclick="UnStake2(${balanceStake2[e]})" class="boton azul">UnStake</a >
              
            </div>
@@ -501,7 +501,7 @@ var  balance2 = await contract2.methods.balanceOf(accounts[0]).call()
            </div>
            <div class="card-description">
              <h2>Special Weirdo #${balanceStake2[e]}</h2>
-             <p>Total Mined ${TotalMinado2}</p>
+             <p>Total Mined ${parseFloat(TotalMinado2)*10}</p>
              <a onclick="UnStake2(${balanceStake2[e]})" class="boton azul">UnStake</a >
              
            </div>
