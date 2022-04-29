@@ -437,7 +437,8 @@ var  balance2 = await contract2.methods.balanceOf(accounts[0]).call()
           var TotalMinado2 = web3.utils.fromWei(userBalance2);
           
           TokenUser  = parseFloat(TokenUser) + (parseFloat(TotalMinado2) * 10);
-          TotalMinado2 = parseFloat(TotalMinado2).toFixed(3)
+          TotalMinado2 = parseFloat(TotalMinado2*10).toFixed(3)
+
         
 
           document.getElementById("Your_Reward").textContent = TokenUser.toFixed(2);
@@ -455,7 +456,7 @@ var  balance2 = await contract2.methods.balanceOf(accounts[0]).call()
            </div>
            <div class="card-description">
              <h2>Special Weirdo #${balanceStake2[e]}</h2>
-             <p>Total Mined ${parseFloat(TotalMinado2)*10}</p>
+             <p>Total Mined ${TotalMinado2}</p>
              <a onclick="UnStake2(${balanceStake2[e]})" class="boton azul">UnStake</a >
              
            </div>
@@ -484,7 +485,8 @@ var  balance2 = await contract2.methods.balanceOf(accounts[0]).call()
         stake.methods.getCurrentStakeEarned2(balanceStake2[e]).call().then(userBalance2 => {
           
           var TotalMinado2 = web3.utils.fromWei(userBalance2);
-          TotalMinado2 = parseFloat(TotalMinado2).toFixed(3)
+        
+          TotalMinado2 = parseFloat(TotalMinado2*10).toFixed(3)
           
           document.getElementById("Your_Reward").textContent = TokenUser.toFixed(2);
           document.getElementById("Your_Reward_M").textContent = TokenUser.toFixed(2);
@@ -501,7 +503,7 @@ var  balance2 = await contract2.methods.balanceOf(accounts[0]).call()
            </div>
            <div class="card-description">
              <h2>Special Weirdo #${balanceStake2[e]}</h2>
-             <p>Total Mined ${parseFloat(TotalMinado2)*10}</p>
+             <p>Total Mined ${TotalMinado2}</p>
              <a onclick="UnStake2(${balanceStake2[e]})" class="boton azul">UnStake</a >
              
            </div>
