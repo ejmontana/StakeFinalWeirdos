@@ -336,32 +336,6 @@ const StakeALL = async () => {
 }
 
 
-//Unstaker all
-const UnStakeALL = async () => {
-console.log(balanceStake)
-  
-  stake.methods.unStakeNFT(balanceStake).send({ from: accounts[0] }).then(result => {
-    loadDapp()
-
-  }).catch((err) => {
-    console.log(err)
-  });
-
-
-}
-
-
-const UnStakeALL2 = async () => {
- 
-  stake.methods.unStakeNFT2(balanceStake2).send({ from: accounts[0] }).then(result => {
-    loadDapp()
-
-  }).catch((err) => {
-    console.log(err)
-  });
-
-
-}
 
 
 var coll = document.getElementsByClassName("collapsible");
