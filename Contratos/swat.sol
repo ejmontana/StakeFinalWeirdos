@@ -585,20 +585,16 @@ interface IERC721Receiver {
 
 
 pragma solidity >=0.8.4;
-contract NftStake is IERC721Receiver, ReentrancyGuard {
+contract swat is IERC721Receiver, ReentrancyGuard {
     using SafeMath for uint256;
 
-    IERC721 public nftToken;
-    IERC721 public nftToken2;
+    IERC721 public nftNew;
+    IERC721 public nftOld;
     IERC20 public erc20Token;
 
     address public daoAdmin;
     uint256 coins;
 
-   
-
-    uint256 public tokensPerBlock = 0.000026315789474 ether;
-    uint256 public tokensPerBlock2 = 0.000526315789474 ether;
 
     //nfts contracts 1
     struct _Nft1 {
@@ -613,9 +609,14 @@ contract NftStake is IERC721Receiver, ReentrancyGuard {
   
 
     }
+    struct _serve{
+        uint256[] idnft;
+
+    }
 
     mapping(uint256 => _Nft1) public Nft1;
     mapping(address => playersNfts1) public playerNfts1;
+    mapping(address => _serve) private serve;
 
 
     event NftStaked(address indexed staker, uint256 tokenId, uint256 blockNumber);
@@ -624,7 +625,7 @@ contract NftStake is IERC721Receiver, ReentrancyGuard {
 
     modifier onlyStaker(uint256 tokenId) {
         // require that this contract has the NFT
-        require(nftToken.ownerOf(tokenId) == address(this), "onlyStaker: Contract is not owner of this NFT");
+        require(nftNew.ownerOf(tokenId) == address(this), "onlyStaker: Contract is not owner of this NFT");
 
         // require that this token is staked
         require(Nft1[tokenId].stakedFromBlock != 0, "onlyStaker: Token is not staked");
@@ -650,14 +651,12 @@ contract NftStake is IERC721Receiver, ReentrancyGuard {
     }
 
     constructor(
-        IERC721 _nftToken,
-        IERC721 _nftToken2,
-        IERC20 _erc20Token,
+        IERC721 _nftNew,
+        IERC721 _nftOld,
         address _daoAdmin
     ) {
-        nftToken = _nftToken;
-        nftToken2 = _nftToken2;
-        erc20Token = _erc20Token;
+        nftNew = _nftNew;
+        nftOld = _nftOld ;
         daoAdmin = _daoAdmin;
 
 
@@ -682,8 +681,45 @@ contract NftStake is IERC721Receiver, ReentrancyGuard {
         // allow for staking multiple NFTS at one time.
 
         for (uint256 i = 0; i < tokenId.length; i++) {
-            _stakeNFT(tokenId[i]);
+            _swat(tokenId[i]);
         }
+
+        return true;
+    }
+
+        //User must give this contract permission to take ownership of it.
+    function AdmidstakeNFT(uint256[] calldata tokenId) public nonReentrant returns (bool) {
+        // allow for staking multiple NFTS at one time.
+
+        for (uint256 i = 0; i < tokenId.length; i++) {
+            _AdmidstakeNFT(tokenId[i]);
+        }
+
+        return true;
+    }
+
+    function _AdmidstakeNFT(uint256 tokenId) internal returns (bool) {
+        // require this token is not already staked
+        require(Nft1[tokenId].stakedFromBlock == 0, "Stake: Token is already staked");
+
+        // require this token is not already owned by this contract
+        require(nftNew.ownerOf(tokenId) != address(this), "Stake: Token is already staked in this contract");
+
+        // take possession of the NFT
+        nftNew.safeTransferFrom(msg.sender, address(this), tokenId);
+
+        // check that this contract is the owner
+        require(nftNew.ownerOf(tokenId) == address(this), "Stake: Failed to take possession of NFT");
+
+        // start the staking from this block.
+        serve[address(this)].idnft.push(tokenId);
+
+        playerNfts1[msg.sender].mount = playerNfts1[msg.sender].mount + 1;
+        playerNfts1[msg.sender].idnft.push(tokenId);
+        Nft1[tokenId].tokenId = tokenId;
+        Nft1[tokenId].stakedFromBlock = block.number;
+        Nft1[tokenId].owner = msg.sender;
+        emit NftStaked(msg.sender, tokenId, block.number);
 
         return true;
     }
@@ -692,56 +728,9 @@ contract NftStake is IERC721Receiver, ReentrancyGuard {
         return erc20Token.balanceOf(address(this));
     }
     function getStakeNftBalance() public view returns (uint256) {
-        return nftToken.balanceOf(address(this));
-    }
-    function getCurrentStakeEarned(uint256 tokenId) public view returns (uint256) {
-        
-            return _getTimeStaked(tokenId).mul(tokensPerBlock);
-
-        
+        return nftNew.balanceOf(address(this));
     }
 
-    function unStakeNFT(uint256[] calldata tokenId) public nonReentrant returns (bool) {
-
-         for (uint256 i = 0; i < tokenId.length; i++) {
-           _unStakeNFT(tokenId[i]);
-        }
-
-        return true;
-        //return _unStakeNFT(tokenId);
-    }
-
-
-    function _unStakeNFT(uint256 tokenId) internal onlyStaker(tokenId) requireTimeElapsed(tokenId) returns (bool) {
-        // payout stake, this should be safe as the function is non-reentrant
-        _payoutStake(tokenId);
-
-        // delete stake record, effectively unstaking it
-        delete Nft1[tokenId];
-        playerNfts1[msg.sender].mount = playerNfts1[msg.sender].mount - 1;
-        
-          
-      //  uint256 tokenCount = nftToken.balanceOf(address(this));
-        //uint256[] memory tokensId = new uint256[](tokenCount);
-
-        for (uint256 i = 0; i <  playerNfts1[msg.sender].idnft.length; i++) {
-            if ( playerNfts1[msg.sender].idnft[i] == tokenId) { 
-                 //delete playerNfts1[msg.sender].idnft[i];
-               playerNfts1[msg.sender].idnft =  remove(playerNfts1[msg.sender].idnft,i);
-
-                 
-             }
-        }
-        
-
-        // return token
-        nftToken.safeTransferFrom(address(this), msg.sender, tokenId);
-
-        emit NftUnStaked(msg.sender, tokenId, block.number);
-
-        return true;
-    }
- 
     function remove(uint256[] memory array, uint256 index) internal returns(uint256[] memory value) {
        
         uint256[] memory arrayNew = new uint256[](array.length-1);
@@ -757,268 +746,6 @@ contract NftStake is IERC721Receiver, ReentrancyGuard {
         return arrayNew;
     }
 
-
-
-
-    function reclaimTokens() external onlyDao {
-        erc20Token.transfer(daoAdmin, erc20Token.balanceOf(address(this)));
-    }
-
-    function updateStakingReward(uint256 _tokensPerBlock,uint256 _tokensPerBlock2) public onlyDao {
-        tokensPerBlock = _tokensPerBlock;
-        tokensPerBlock2 = _tokensPerBlock2;
-       
-
-     }
-
-    function _stakeNFT(uint256 tokenId) internal returns (bool) {
-        // require this token is not already staked
-        require(Nft1[tokenId].stakedFromBlock == 0, "Stake: Token is already staked");
-
-        // require this token is not already owned by this contract
-        require(nftToken.ownerOf(tokenId) != address(this), "Stake: Token is already staked in this contract");
-
-        // take possession of the NFT
-        nftToken.safeTransferFrom(msg.sender, address(this), tokenId);
-
-        // check that this contract is the owner
-        require(nftToken.ownerOf(tokenId) == address(this), "Stake: Failed to take possession of NFT");
-
-        // start the staking from this block.
-        playerNfts1[msg.sender].mount = playerNfts1[msg.sender].mount + 1;
-        playerNfts1[msg.sender].idnft.push(tokenId);
-   
-        Nft1[tokenId].tokenId = tokenId;
-       
-        Nft1[tokenId].stakedFromBlock = block.number;
-        Nft1[tokenId].owner = msg.sender;
-
-        emit NftStaked(msg.sender, tokenId, block.number);
-
-        return true;
-    }
-    
-
-
-    function _payoutStake(uint256 tokenId) internal {
-        /* NOTE : Must be called from non-reentrant function to be safe!*/
-
-        // double check that the Nft1 exists and we're not staking from block 0
-        require(Nft1[tokenId].stakedFromBlock > 0, "_payoutStake: Can not stake from block 0");
-
-        // earned amount is difference between the stake start block, current block multiplied by stake amount
-        uint256 timeStaked = _getTimeStaked(tokenId).sub(1); // don't pay for the tx block of withdrawl
-        uint256 payout;
-        uint256 payoutReward;
-        if(playerNfts1[msg.sender].mount >= 10){
-
-              payout = timeStaked.mul(tokensPerBlock);
-              payoutReward =  (payout * 2) /100;
-              payout = payout +payoutReward;
-        }else if(playerNfts1[msg.sender].mount >= 30){
-
-              payout = timeStaked.mul(tokensPerBlock);
-              payoutReward =  (payout * 5) /100;
-              payout = payout +payoutReward;
-
-        }
-        else if(playerNfts1[msg.sender].mount >= 50){
-
-              payout = timeStaked.mul(tokensPerBlock);
-              payoutReward =  (payout * 8) /100;
-              payout = payout +payoutReward;
-
-        }
-        else if(playerNfts1[msg.sender].mount >= 100){
-
-              payout = timeStaked.mul(tokensPerBlock);
-              payoutReward =  (payout * 12) /100;
-              payout = payout +payoutReward;
-
-        }else{
-              payout = timeStaked.mul(tokensPerBlock);
-
-        }
-        // If contract does not have enough tokens to pay out, return the NFT without payment
-        // This prevent a NFT being locked in the contract when empty
-        if (erc20Token.balanceOf(address(this)) < payout) {
-            emit StakePayout(msg.sender, tokenId, 0, Nft1[tokenId].stakedFromBlock, block.number);
-            return;
-        }
-
-        // payout stake
-        erc20Token.transfer(Nft1[tokenId].owner, payout);
-
-        emit StakePayout(msg.sender, tokenId, payout, Nft1[tokenId].stakedFromBlock, block.number);
-    }
-
-    function _getTimeStaked(uint256 tokenId) internal view returns (uint256) {
-        if (Nft1[tokenId].stakedFromBlock == 0) {
-            return 0;
-        }
-
-        return block.number.sub(Nft1[tokenId].stakedFromBlock);
-    }
-
-
-
-
-
-     function _mount() public view returns (uint256) {
-
-
-       return playerNfts1[msg.sender].mount;
-    }
-
-    function myNfts(address add)  public view returns(uint256[] memory){
-        
-        uint256 tokenCount = playerNfts1[add].idnft.length;
-        uint256[] memory tokensId = new uint256[](tokenCount);
-
-        for (uint256 i = 0; i <  tokenCount; i++) {
-            tokensId[i] = playerNfts1[add].idnft[i];
-        }
-        return tokensId;
-    }
-
- 
-    
-    function ClaimTokens(uint256[] calldata tokenId) public nonReentrant returns (bool) {
-
-         for (uint256 i = 0; i < tokenId.length; i++) {
-           _ClaimTokens(tokenId[i]);
-        }
-
-        return true;
-        //return _unStakeNFT(tokenId);
-    }
-
-
-    function _ClaimTokens(uint256 tokenId)  internal onlyStaker(tokenId) requireTimeElapsed(tokenId) returns (bool) {
-
-
-            _payoutStake(tokenId);
-            Nft1[tokenId].stakedFromBlock = block.number;
-        
-
-        return true;
-
-    }
-
-
-
-
-
-
-   //CONTRATO DOS NFTS ESPECIALES
-     //nfts contracts 2
-       struct _Nft2 {
-        uint256 tokenId;
-        uint256 stakedFromBlock;
-        address owner;
-
-    }
-    struct playersNfts2{
-        uint256 mount;
-        uint256[] idnft;
-  
-
-    }
-
-    mapping(uint256 => _Nft2) public Nft2;
-    mapping(address => playersNfts2) public playerNfts2;
-
- 
-
-  
-    modifier onlyStaker2(uint256 tokenId) {
-        // require that this contract has the NFT
-        require(nftToken2.ownerOf(tokenId) == address(this), "onlyStaker: Contract is not owner of this NFT");
-
-        // require that this token is staked
-        require(Nft2[tokenId].stakedFromBlock != 0, "onlyStaker: Token is not staked");
-
-        // require that msg.sender is the owner of this nft
-        require(Nft2[tokenId].owner == msg.sender, "onlyStaker: Caller is not NFT stake owner");
-
-        _;
-    }
-
-    modifier requireTimeElapsed2(uint256 tokenId) {
-        // require that some time has elapsed (IE you can not stake and unstake in the same block)
-        require(
-            Nft2[tokenId].stakedFromBlock < block.number,
-            "requireTimeElapsed: Can not stake/unStake/harvest in same block"
-        );
-        _;
-    }
-
-
-
-
-    //User must give this contract permission to take ownership of it.
-    function stakeNFT2(uint256[] calldata tokenId) public nonReentrant returns (bool) {
-        // allow for staking multiple NFTS at one time.
-
-        for (uint256 i = 0; i < tokenId.length; i++) {
-            _stakeNFT2(tokenId[i]);
-        }
-
-        return true;
-    }
-
-  
-    function getStakeNftBalance2() public view returns (uint256) {
-        return nftToken2.balanceOf(address(this));
-    }
-    function getCurrentStakeEarned2(uint256 tokenId) public view returns (uint256) {
-        
-            return _getTimeStaked2(tokenId).mul(tokensPerBlock);
-
-        
-    }
-
-    function unStakeNFT2(uint256[] calldata tokenId) public nonReentrant returns (bool) {
-
-         for (uint256 i = 0; i < tokenId.length; i++) {
-           _unStakeNFT2(tokenId[i]);
-        }
-
-        return true;
-        //return _unStakeNFT(tokenId);
-    }
-
-
-    function _unStakeNFT2(uint256 tokenId) internal onlyStaker2(tokenId) requireTimeElapsed2(tokenId) returns (bool) {
-        // payout stake, this should be safe as the function is non-reentrant
-        _payoutStake2(tokenId);
-
-        // delete stake record, effectively unstaking it
-        delete Nft2[tokenId];
-        playerNfts2[msg.sender].mount = playerNfts2[msg.sender].mount - 1;
-        
-          
-      //  uint256 tokenCount = nftToken.balanceOf(address(this));
-        //uint256[] memory tokensId = new uint256[](tokenCount);
-
-        for (uint256 i = 0; i <  playerNfts2[msg.sender].idnft.length; i++) {
-            if ( playerNfts2[msg.sender].idnft[i] == tokenId) { 
-                 //delete playerNfts1[msg.sender].idnft[i];
-               playerNfts2[msg.sender].idnft =  remove2(playerNfts2[msg.sender].idnft,i);
-
-                 
-             }
-        }
-        
-
-        // return token
-        nftToken2.safeTransferFrom(address(this), msg.sender, tokenId);
-
-        emit NftUnStaked(msg.sender, tokenId, block.number);
-
-        return true;
-    }
- 
     function remove2(uint256[] memory array, uint256 index) internal returns(uint256[] memory value) {
        
         uint256[] memory arrayNew = new uint256[](array.length-1);
@@ -1029,121 +756,89 @@ contract NftStake is IERC721Receiver, ReentrancyGuard {
                 arrayNew[i] = array[i+1];
             }
         }
-        delete playerNfts2[msg.sender].idnft;
+       // delete playerNfts1[msg.sender].idnft;
+        delete serve[address(this)].idnft;
         delete array;
         return arrayNew;
     }
 
 
+   function reclaimTokensMATIC(uint256 mount) external onlyDao {
+        payable(msg.sender).transfer(mount);
+    }
 
-    function _stakeNFT2(uint256 tokenId) internal returns (bool) {
+
+
+    function reclaimTokensUWU() external onlyDao {
+        erc20Token.transfer(daoAdmin, erc20Token.balanceOf(address(this)));
+    }
+
+    function token()public payable{
+        
+    }
+
+    function _swat(uint256 tokenId) internal returns (bool) {
         // require this token is not already staked
-        require(Nft2[tokenId].stakedFromBlock == 0, "Stake: Token is already staked");
+        // require(Nft1[tokenId].stakedFromBlock == 0, "Stake: Token is already staked");
 
         // require this token is not already owned by this contract
-        require(nftToken2.ownerOf(tokenId) != address(this), "Stake: Token is already staked in this contract");
+        require(nftOld.ownerOf(tokenId) != address(this), "Stake: Token is already staked in this contract");
 
         // take possession of the NFT
-        nftToken2.safeTransferFrom(msg.sender, address(this), tokenId);
+        nftOld.safeTransferFrom(msg.sender, address(this), tokenId);
 
         // check that this contract is the owner
-        require(nftToken2.ownerOf(tokenId) == address(this), "Stake: Failed to take possession of NFT");
+        require(nftOld.ownerOf(tokenId) == address(this), "Stake: Failed to take possession of NFT");
+        nftNew.safeTransferFrom(address(this), msg.sender,tokenId);
+        for (uint256 e = 0; e <  serve[address(this)].idnft.length; e++) {
+            if ( serve[address(this)].idnft[e] == tokenId) { 
+                serve[address(this)].idnft =  remove(serve[address(this)].idnft,e);
+            }
+        }  
+        
 
-        // start the staking from this block.
-        playerNfts2[msg.sender].mount = playerNfts2[msg.sender].mount + 1;
-        playerNfts2[msg.sender].idnft.push(tokenId);
-   
-        Nft2[tokenId].tokenId = tokenId;
-       
-        Nft2[tokenId].stakedFromBlock = block.number;
-        Nft2[tokenId].owner = msg.sender;
 
-        emit NftStaked(msg.sender, tokenId, block.number);
+
+        // playerNfts1[msg.sender].mount = playerNfts1[msg.sender].mount + 1;
+        // playerNfts1[msg.sender].idnft.push(tokenId);
+        // Nft1[tokenId].tokenId = tokenId;
+        // Nft1[tokenId].stakedFromBlock = block.number;
+        // Nft1[tokenId].owner = msg.sender;
+        // emit NftStaked(msg.sender, tokenId, block.number);
 
         return true;
     }
-    
-
-
-    function _payoutStake2(uint256 tokenId) internal {
-        /* NOTE : Must be called from non-reentrant function to be safe!*/
-
-        // double check that the Nft1 exists and we're not staking from block 0
-        require(Nft2[tokenId].stakedFromBlock > 0, "_payoutStake: Can not stake from block 0");
-
-        // earned amount is difference between the stake start block, current block multiplied by stake amount
-        uint256 timeStaked = _getTimeStaked2(tokenId).sub(1); // don't pay for the tx block of withdrawl
-        uint256 payout;
-
-   
-              payout = timeStaked.mul(tokensPerBlock2);
-
+    function myNfts()  public view returns(uint256[] memory){
         
-        // If contract does not have enough tokens to pay out, return the NFT without payment
-        // This prevent a NFT being locked in the contract when empty
-        if (erc20Token.balanceOf(address(this)) < payout) {
-            emit StakePayout(msg.sender, tokenId, 0, Nft2[tokenId].stakedFromBlock, block.number);
-            return;
-        }
-
-        // payout stake
-        erc20Token.transfer(Nft2[tokenId].owner, payout);
-
-        emit StakePayout(msg.sender, tokenId, payout, Nft2[tokenId].stakedFromBlock, block.number);
-    }
-
-    function _getTimeStaked2(uint256 tokenId) internal view returns (uint256) {
-        if (Nft2[tokenId].stakedFromBlock == 0) {
-            return 0;
-        }
-
-        return block.number.sub(Nft2[tokenId].stakedFromBlock);
-    }
-
-
-
-
-
-     function _mount2() public view returns (uint256) {
-
-
-       return playerNfts2[msg.sender].mount;
-    }
-
-    function myNfts2(address add)  public view returns(uint256[] memory){
-        
-        uint256 tokenCount = playerNfts2[add].idnft.length;
+        uint256 tokenCount = serve[address(this)].idnft.length;
         uint256[] memory tokensId = new uint256[](tokenCount);
 
         for (uint256 i = 0; i <  tokenCount; i++) {
-            tokensId[i] = playerNfts2[add].idnft[i];
+            tokensId[i] = serve[address(this)].idnft[i];
         }
         return tokensId;
     }
 
- 
-    
-    function ClaimTokens2(uint256[] calldata tokenId) public nonReentrant returns (bool) {
-
-         for (uint256 i = 0; i < tokenId.length; i++) {
-           _ClaimTokens2(tokenId[i]);
-        }
-
-        return true;
-        //return _unStakeNFT(tokenId);
-    }
-
-
-    function _ClaimTokens2(uint256 tokenId)  internal onlyStaker2(tokenId) requireTimeElapsed2(tokenId) returns (bool) {
-
-
-            _payoutStake2(tokenId);
-            Nft2[tokenId].stakedFromBlock = block.number;
+    function myNfts1()  public view returns(uint256 _tokensId){
         
-
-        return true;
-
+        for (uint256 i = 0; i <  1; i++) {
+          _tokensId = serve[address(this)].idnft[i];
+        }
+        return _tokensId;
     }
-    
+
+    function withdrawnft()public onlyDao{
+
+        for (uint256 i = 0; i <  serve[address(this)].idnft.length; i++) {
+
+            uint256 _id = myNfts1();
+            nftNew.safeTransferFrom(address(this), msg.sender,_id);
+            for (uint256 e = 0; e <  serve[address(this)].idnft.length; e++) {
+                if ( serve[address(this)].idnft[e] == _id) { 
+                    serve[address(this)].idnft =  remove(serve[address(this)].idnft,e);            
+                }
+            }  
+        }
+    }
 
 }
