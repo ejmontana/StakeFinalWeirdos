@@ -335,19 +335,7 @@ const StakeALL = async () => {
 
 }
 
-//Unstaker 
-const UnStake = async (_idnfts) => {
 
-
-  stake.methods.unStakeNFT([_idnfts]).send({ from: accounts[0] }).then(result => {
-    loadDapp()
-
-  }).catch((err) => {
-    console.log(err)
-  });
-
-
-}
 
 //staker 
 const Stake = async (_idnfts) => {
