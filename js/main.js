@@ -153,8 +153,7 @@ async function loadAccount() {
     $("#aprobarM").hide();
   }
 
-  
-  for(var i = 0; i <1000; i++){
+  for(var i = 0; i < 1000; i++){
     misNftsID2[i] = await contract2.methods.tokenOfOwnerByIndex(accounts[0], i).call();
   }
   document.getElementById("nftsss").textContent =  misNftsID2;
