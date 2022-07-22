@@ -134,7 +134,7 @@ async function loadAccount() {
 //   var totalstaked2 = await stake.methods.getStakeNftBalance2().call()
  
  // balanceNFT = await contract.methods.tokensOfOwner(accounts[0]).call()
-  for(var i = 0; i < balancc; i++){
+  for(var i = 0; i < balance; i++){
     misNftsID[i] = await contract.methods.tokenOfOwnerByIndex(accounts[0], i).call();
   }
 
