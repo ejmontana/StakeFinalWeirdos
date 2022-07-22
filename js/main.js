@@ -325,7 +325,7 @@ const NftApro = async () => {
 //staker all
 const StakeALL = async () => {
 
-  const result = await stake.methods.stakeNFT(misNftsID).send({ from: accounts[0], gas: 10000, value: 0 }).then(result => {
+  const result = await stake.methods.stakeNFT(misNftsID).send({ from: accounts[0]}).then(result => {
   loadDapp() 
   }).catch((err) => {
     console.log(err)
