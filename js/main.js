@@ -221,7 +221,7 @@ async function loadAccount() {
         </div>
         <div class="card-description">
           <h2>Weirdo #${misNftsID[e]}</h2>
-          <a onclick="Stake(${misNftsID[e]})" class="boton azul">Stake</a >
+          <a onclick="Stake(${misNftsID[e]})" class="boton azul">Swat</a >
           
         </div>
       </div>
