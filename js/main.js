@@ -26,12 +26,12 @@ var TotalMinado;
 var TotalMinado2;
 var tokenContract;
 var contract2;
-let UserStake
+let UserStake;
 
 var totalstaked;
 const NftsAddress = "0x0aB5f9bC3d004E3492040a38A5Fa76c29b5769f5";
 const NftsAddress2 = "0x6b01FEF520818A439d281cf7b03EE2e1e0A32c4A";
-const stakeAddress = "0xB66bAA8d4e2215E848808d5FcC0d551170F702Ba";
+const stakeAddress = "0x6Cb8eAD371cA59B0405bBB445D4C638811809A31";
 const tokenAddress = "0xC586a4A0dB0bC1169d490b8FBF0633cC06d0f0d3"; // mainnet busd
 
 const NftsABI = [
@@ -1527,15 +1527,16 @@ async function loadAccount() {
   accounts = await web3.eth.getAccounts();
   balance = await contract.methods.balanceOf(accounts[0]).call();
   var balance2 = await contract2.methods.balanceOf(accounts[0]).call();
-  balanceStake = await stake.methods.stakedNFTSByUser(accounts[0], NftsAddress).call()
-  UserStake = await stake.methods.tokensStakedByUser(accounts[0]).call()
- 
+  balanceStake = await stake.methods
+    .stakedNFTSByUser(accounts[0], NftsAddress)
+    .call();
+  UserStake = await stake.methods.tokensStakedByUser(accounts[0]).call();
+
   // balanceStake2 = await stake.methods.myNfts2(accounts[0]).call()
-    totalstaked = await stake.methods.tokensStaked().call()
-    console.log(totalstaked)
+  totalstaked = await stake.methods.tokensStaked().call();
+  console.log(totalstaked);
   // var totalstaked2 = await stake.methods.getStakeNftBalance2().call()
 
- 
   for (var i = 0; i < balance; i++) {
     misNftsID[i] = await contract.methods
       .tokenOfOwnerByIndex(accounts[0], i)
@@ -1741,29 +1742,32 @@ async function loadAccount() {
   }
 
   for (let e = 0; e < balanceStake.length; e++) {
-    
     imgURL = "https://weirdometada.com/" + balanceStake[e];
 
-    axios.get(imgURL)
+    axios
+      .get(imgURL)
       .then((response) => {
         // console.log(imgURL)
 
         // función que se ejecutará al recibir una respuesta
-        var nftsMis = response.data.image
+        var nftsMis = response.data.image;
 
-        stake.methods.pendingRewards(accounts[0], balanceStake[e],NftsAddress).call().then(userBalance => {
-          TotalMinado = web3.utils.fromWei(userBalance);
-          TokenUser = parseFloat(TokenUser) + parseFloat(TotalMinado);
+        stake.methods
+          .pendingRewards(accounts[0], balanceStake[e], NftsAddress)
+          .call()
+          .then((userBalance) => {
+            TotalMinado = web3.utils.fromWei(userBalance);
+            TokenUser = parseFloat(TokenUser) + parseFloat(TotalMinado);
 
-          TotalMinado = parseFloat(TotalMinado).toFixed(3)
+            TotalMinado = parseFloat(TotalMinado).toFixed(3);
 
-          const nftdiv = document.getElementById("carousel-img2-M")
-          const insertarnft = document.createElement("div")
-          insertarnft.classList.add("column")
-          insertarnft.classList.add("is-one-quarter-desktop")
-          insertarnft.classList.add("is-half-tablet")
+            const nftdiv = document.getElementById("carousel-img2-M");
+            const insertarnft = document.createElement("div");
+            insertarnft.classList.add("column");
+            insertarnft.classList.add("is-one-quarter-desktop");
+            insertarnft.classList.add("is-half-tablet");
 
-          insertarnft.innerHTML = `
+            insertarnft.innerHTML = `
            <div class="card is-loaded">
            <div class="card-image is-loaded"  style="background-image: url(${nftsMis})" data-image-full="${nftsMis}">
              <img src=${nftsMis}" alt="Psychopomp" />
@@ -1775,43 +1779,49 @@ async function loadAccount() {
 
            </div>
          </div>
-       `
-          nftdiv.appendChild(insertarnft)
-        })
+       `;
+            nftdiv.appendChild(insertarnft);
+          })
           .catch(function (error) {
             // función para capturar el error
             console.log(error);
-          })
-
-      }).catch((err) => {
-        console.log(err)
+          });
+      })
+      .catch((err) => {
+        console.log(err);
       });
   }
 
   for (let e = 0; e < balanceStake.length; e++) {
     imgURL = "https://weirdometada.com/" + balanceStake[e];
-    axios.get(imgURL)
+    axios
+      .get(imgURL)
       .then((response) => {
         //console.log(imgURL)
 
         // función que se ejecutará al recibir una respuesta
-        var nftsMis = response.data.image
+        var nftsMis = response.data.image;
 
-        stake.methods.pendingRewards(accounts[0], balanceStake[e],NftsAddress).call().then(userBalance => {
-          TotalMinado = web3.utils.fromWei(userBalance);
-          /*  TokenUser  = parseFloat(TokenUser) + parseFloat(TotalMinado) ;*/
+        stake.methods
+          .pendingRewards(accounts[0], balanceStake[e], NftsAddress)
+          .call()
+          .then((userBalance) => {
+            TotalMinado = web3.utils.fromWei(userBalance);
+            /*  TokenUser  = parseFloat(TokenUser) + parseFloat(TotalMinado) ;*/
 
-          TotalMinado = parseFloat(TotalMinado).toFixed(3)
-          document.getElementById("Your_Reward").textContent = TokenUser.toFixed(2);
-          document.getElementById("Your_Reward_M").textContent = TokenUser.toFixed(2);
+            TotalMinado = parseFloat(TotalMinado).toFixed(3);
+            document.getElementById("Your_Reward").textContent =
+              TokenUser.toFixed(2);
+            document.getElementById("Your_Reward_M").textContent =
+              TokenUser.toFixed(2);
 
-          const nftdiv = document.getElementById("carousel-img2")
-          const insertarnft = document.createElement("div")
-          insertarnft.classList.add("column")
-          insertarnft.classList.add("is-one-quarter-desktop")
-          insertarnft.classList.add("is-half-tablet")
+            const nftdiv = document.getElementById("carousel-img2");
+            const insertarnft = document.createElement("div");
+            insertarnft.classList.add("column");
+            insertarnft.classList.add("is-one-quarter-desktop");
+            insertarnft.classList.add("is-half-tablet");
 
-          insertarnft.innerHTML = `
+            insertarnft.innerHTML = `
            <div class="card is-loaded">
            <div class="card-image is-loaded"  style="background-image: url(${nftsMis})" data-image-full="${nftsMis}">
              <img src=${nftsMis}" alt="Psychopomp" />
@@ -1823,16 +1833,16 @@ async function loadAccount() {
 
            </div>
          </div>
-       `
-          nftdiv.appendChild(insertarnft)
-        })
+       `;
+            nftdiv.appendChild(insertarnft);
+          })
           .catch(function (error) {
             // función para capturar el error
             console.log(error);
-          })
-
-      }).catch((err) => {
-        console.log(err)
+          });
+      })
+      .catch((err) => {
+        console.log(err);
       });
   }
 
@@ -1972,15 +1982,16 @@ async function loadAccount() {
   console.log(connectedAddr);
   document.getElementById("Your_Weirdos").textContent =
     parseFloat(balance) + parseFloat(balance2);
-  document.getElementById("Staked").textContent = UserStake
+  document.getElementById("Staked").textContent = UserStake;
   document.getElementById("Total_Stake").textContent = parseFloat(totalstaked);
   document.getElementById("connected").textContent = connectedAddr;
   document.getElementById("connected2").textContent = connectedAddr;
 
   document.getElementById("Your_Weirdos_M").textContent =
     parseFloat(balance) + parseFloat(balance2);
-  document.getElementById("Staked_M").textContent = UserStake ;
-  document.getElementById("Total_Stake_M").textContent = parseFloat(totalstaked) 
+  document.getElementById("Staked_M").textContent = UserStake;
+  document.getElementById("Total_Stake_M").textContent =
+    parseFloat(totalstaked);
 }
 
 async function loadDapp() {
@@ -2069,9 +2080,7 @@ const Stake = async (_idnfts) => {
   stake.methods
     .stake(_idnfts, add, traitID)
     .send({ from: accounts[0] })
-    .then((result) => {
-      
-    })
+    .then((result) => {})
     .catch((err) => {
       console.log(err);
     });
@@ -2105,11 +2114,9 @@ const Claim2 = async () => {
 const UnStake = async (_idnfts) => {
   let add = "0x0aB5f9bC3d004E3492040a38A5Fa76c29b5769f5";
   stake.methods
-    .unstake(_idnfts,add)
+    .unstake(_idnfts, add)
     .send({ from: accounts[0] })
-    .then((result) => {
-      
-    })
+    .then((result) => {})
     .catch((err) => {
       console.log(err);
     });
@@ -2252,6 +2259,6 @@ const Idtraits = async (_idnfts) => {
       console.log(error);
       return error;
     });
-
+  console.log(traitnum);
   return traitnum;
 };
