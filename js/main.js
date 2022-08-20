@@ -1554,18 +1554,18 @@ async function loadAccount() {
   }
   //console.log(misNftsID)
 
-  //es aprovado
-  // if (balance2 <= 0 && balanceStake2.length <= 0) {
-  //   $("#aprobar2").hide();
-  //   $(".StakeSpecial").hide();
+ // es aprovado
+  if (balance2 <= 0 && balanceStake2.length <= 0) {
+    $("#aprobar2").hide();
+    $(".StakeSpecial").hide();
 
-  // }
+  }
 
-  // if (balance2 <= 0 && balanceStake2.length <= 0) {
-  //   $("#aprobarMN").hide();
-  //   $(".StakeSpecialM").hide();
+  if (balance2 <= 0 && balanceStake2.length <= 0) {
+    $("#aprobarMN").hide();
+    $(".StakeSpecialM").hide();
 
-  // }
+  }
 
   IsAproba = await contract.methods
     .isApprovedForAll(accounts[0], stakeAddress)
@@ -2100,8 +2100,10 @@ const Stake2 = async (_idnfts) => {
 };
 
 const Claim = async () => {
+  let add = "0x0aB5f9bC3d004E3492040a38A5Fa76c29b5769f5";
+
   stake.methods
-    .ClaimTokens(balanceStake)
+    .harvestBatch(accounts[0], add)
     .send({ from: accounts[0] })
     .then((result) => {
       loadDapp();
@@ -2111,10 +2113,34 @@ const Claim = async () => {
     });
 };
 
+const Claim2 = async () => {
+  let add = "0x6b01FEF520818A439d281cf7b03EE2e1e0A32c4A";
 
+  stake.methods
+    .harvestBatch(accounts[0], add)
+    .send({ from: accounts[0] })
+    .then((result) => {
+      loadDapp();
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};
 //Unstaker
 const UnStake = async (_idnfts) => {
   let add = "0x0aB5f9bC3d004E3492040a38A5Fa76c29b5769f5";
+  stake.methods
+    .unstake(_idnfts, add)
+    .send({ from: accounts[0] })
+    .then((result) => {})
+    .catch((err) => {
+      console.log(err);
+    });
+};
+
+//Unstaker
+const UnStake2 = async (_idnfts) => {
+  let add = "0x6b01FEF520818A439d281cf7b03EE2e1e0A32c4A";
   stake.methods
     .unstake(_idnfts, add)
     .send({ from: accounts[0] })
